@@ -1,90 +1,40 @@
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import {
-  Mail,
-  Phone,
-  MapPin,
-  Send,
-  Github,
-  Linkedin,
-  Instagram,
-  MessageCircle,
-  Globe,
+  Send, Phone
 } from "lucide-react";
-// import emailjs from "@emailjs/browser";
-
+import axios from "axios";
 const Contact = () => {
   const form = useRef();
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
 
-  // Replace with your actual EmailJS credentials if needed
-  const SERVICE_ID = "service_xxxxxx";
-  const TEMPLATE_ID = "template_xxxxxx";
-  const PUBLIC_KEY = "your_public_key";
+  const sendMessage = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
+    const formData = new FormData(form.current);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      message: formData.get("message"),
+    };
 
-    const socialLinks = [
-      {
-        icon: Github,
-        href: "https://github.com/Sudhakar-sudha",
-        label: "GitHub - Sudhakar",
-        color: "hover:text-gray-400 hover:shadow-[0_0_10px_#6b7280]",
-      },
-      {
-        icon: Linkedin,
-        href: "https://www.linkedin.com/in/sudhakar89/",
-        label: "LinkedIn - Sudhakar",
-        color: "hover:text-blue-500 hover:shadow-[0_0_10px_#3b82f6]",
-      },
-      {
-        icon: MessageCircle,
-        href: "https://wa.me/7092238804",
-        label: "WhatsApp - Sudhakar",
-        color: "hover:text-green-500 hover:shadow-[0_0_10px_#22c55e]",
-      },
-      {
-        icon: Mail,
-        href: "mailto:sudhakarsudha8672@gmail.com",
-        label: "Email Sudhakar",
-        color: "hover:text-red-400 hover:shadow-[0_0_10px_#ef4444]",
-      },
-      {
-        icon: Instagram,
-        href: "https://www.instagram.com/frds_call_me_sudha",
-        label: "Instagram - Sudhakar",
-        color: "hover:text-pink-500 hover:shadow-[0_0_10px_#ec4899]",
-      },
-      {
-        icon: Globe,
-        href: "https://sudhakar-portfolio.vercel.app",
-        label: "Portfolio - Sudhakar",
-        color: "hover:text-cyan-400 hover:shadow-[0_0_10px_#22d3ee]",
-      },
-    ];
-  
-
-  // const sendEmail = (e) => {
-  //   e.preventDefault();
-  //   setLoading(true);
-
-  //   emailjs
-  //     .sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
-  //     .then(
-  //       (result) => {
-  //         console.log(result.text);
-  //         setSent(true);
-  //         setLoading(false);
-  //         e.target.reset();
-  //         setTimeout(() => setSent(false), 4000);
-  //       },
-  //       (error) => {
-  //         console.error(error.text);
-  //         setLoading(false);
-  //         alert("Failed to send message. Please try again.");
-  //       }
-  //     );
-  // };
+    try {
+      const res = await axios.post("https://localestartup-backend.onrender.com/api/sudhakar/contact", data);
+      console.log(res);
+      if (res.data.success) {
+        setSent(true);
+        e.target.reset();
+        setTimeout(() => setSent(false), 3000);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Failed to send message. Try again!");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <section
@@ -113,93 +63,49 @@ const Contact = () => {
 
       {/* Main Grid */}
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 relative z-10">
-        {/* Left: Intro Section */}
+        {/* Left: Info Section */}
         <motion.div
           initial={{ opacity: 0, x: -60 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="bg-white/5 border border-white/10 backdrop-blur-lg p-8 rounded-2xl shadow-lg flex flex-col justify-between"
+          className=" p-8 rounded-2xl shadow-lg flex flex-col items-center justify-center"
         >
-          <div>
-            <h3 className="text-3xl font-bold text-blue-400 mb-4">
-              Let's Build Something Great 🚀
-            </h3>
-            <p className="text-gray-300 mb-6 leading-relaxed">
-              I’m part of a local startup dedicated to helping{" "}
-              <span className="text-blue-400 font-semibold">college students</span> and{" "}
-              <span className="text-blue-400 font-semibold">aspiring developers</span>
-              get their <span className="text-cyan-400 font-semibold">live or final-year projects</span>
-              done with professional quality.
-              <br />
-              <br />
-              Whether you need a <span className="text-blue-400 font-semibold">React</span>,{" "}
-              <span className="text-blue-400 font-semibold">Node.js</span>, or{" "}
-              <span className="text-blue-400 font-semibold">Full Stack</span> project,
-              I’m here to guide, develop, and deliver.
-            </p>
+          <motion.img
+            src="./Questions.png"
+            alt="Ask Sudhakar"
+            initial={{ scale: 0.9, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="w-64 h-64 sm:w-72 sm:h-72 object-cover rounded-2xl  shadow-lg hover:scale-105 transition-transform duration-300"
+          />
 
-            <div className="space-y-4 text-gray-300">
-              <div className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-blue-400" />
-                <span className="break-all">sudhakarsudha8672@gmail.com</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-blue-400" />
-                <span>+91 70922 38804</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <MapPin className="w-5 h-5 text-blue-400" />
-                <span>Sivakasi, Virudhunagar, Tamil Nadu, India</span>
-              </div>
-            </div>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-gray-300 text-center mt-6 text-sm sm:text-base"
+          >
+            Any Queries or Doubts? Ask me immediately!
+            <br />
 
-            <p className="mt-8 text-gray-400">
-              Need a project right now?{" "}
-              <span className="text-cyan-400 font-semibold">
-                Contact me immediately — always available to help you out!
-              </span>
-            </p>
-          </div>
+            <span className="flex items-center justify-center gap-2 mt-3 text-blue-400 font-semibold text-lg">
+              <Phone className="w-5 h-5" />
+              70922&nbsp;38804
+            </span>
 
-          {/* Social Links - Responsive */}
-          <div className="flex flex-wrap gap-4 mt-8 justify-center md:justify-start">
-            <motion.div
-              className="flex flex-wrap justify-center md:justify-start gap-3 mt-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.8 }}
-            >
-              {socialLinks.map((social, index) => {
-                const Icon = social.icon;
-                return (
-                  <motion.a
-                    key={index}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.label}
-                    whileHover={{ scale: 1.12, rotate: 12 }}
-                    whileTap={{ scale: 0.98, rotate: 0 }}
-                    className={`flex items-center justify-center ${social.color} transition-all duration-300`}
-                    // ensure minimum accessible touch size and nice rounded background
-                    style={{ minWidth: 44, minHeight: 44 }}
-                  >
-                    <span className="p-2 rounded-full bg-white/10 border border-white/20
-                                                flex items-center justify-center
-                                                min-w-[44px] min-h-[44px]">
-                      <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-current" />
-                    </span>
-                  </motion.a>
-                );
-              })}
-            </motion.div>
-          </div>
+            <br />
+            <span className="text-gray-400 text-sm">
+              Always available for live or college projects.
+            </span>
+          </motion.p>
+
         </motion.div>
+
 
         {/* Right: Contact Form */}
         <motion.form
           ref={form}
-          // onSubmit={sendEmail}
+          onSubmit={sendMessage}
           initial={{ opacity: 0, x: 60 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}

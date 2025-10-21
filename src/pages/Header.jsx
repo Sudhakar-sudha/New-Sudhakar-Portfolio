@@ -76,18 +76,6 @@ const Header = () => {
 
                         <motion.h2
                             className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-white"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{
-                                opacity: 1,
-                                y: 0,
-                                textShadow: [
-                                    "0 0 10px #3b82f6",
-                                    "0 0 20px #3b82f6",
-                                    "0 0 30px #2563eb",
-                                    "0 0 20px #3b82f6",
-                                    "0 0 10px #3b82f6",
-                                ]
-                            }}
                             transition={{ delay: 0.6, duration: 2, repeat: Infinity, repeatType: "reverse" }}
                         >
                             Full Stack Web & App Developer

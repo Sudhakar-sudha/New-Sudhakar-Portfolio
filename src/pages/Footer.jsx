@@ -24,37 +24,37 @@ const Footer = () => {
       icon: Github,
       href: "https://github.com/Sudhakar-sudha",
       label: "GitHub - Sudhakar",
-      color: "hover:text-gray-400 hover:shadow-[0_0_10px_#6b7280]",
+      color: "hover:text-gray-400 ",
     },
     {
       icon: Linkedin,
       href: "https://www.linkedin.com/in/sudhakar89/",
       label: "LinkedIn - Sudhakar",
-      color: "hover:text-blue-500 hover:shadow-[0_0_10px_#3b82f6]",
+      color: "hover:text-blue-500 ",
     },
     {
       icon: MessageCircle,
       href: "https://wa.me/7092238804",
       label: "WhatsApp - Sudhakar",
-      color: "hover:text-green-500 hover:shadow-[0_0_10px_#22c55e]",
+      color: "hover:text-green-500 ",
     },
     {
       icon: Mail,
       href: "mailto:sudhakarsudha8672@gmail.com",
       label: "Email Sudhakar",
-      color: "hover:text-red-400 hover:shadow-[0_0_10px_#ef4444]",
+      color: "hover:text-red-400 ",
     },
     {
       icon: Instagram,
       href: "https://www.instagram.com/frds_call_me_sudha",
       label: "Instagram - Sudhakar",
-      color: "hover:text-pink-500 hover:shadow-[0_0_10px_#ec4899]",
+      color: "hover:text-pink-500 ",
     },
     {
       icon: Globe,
       href: "https://sudhakar-portfolio.vercel.app",
       label: "Portfolio - Sudhakar",
-      color: "hover:text-cyan-400 hover:shadow-[0_0_10px_#22d3ee]",
+      color: "hover:text-cyan-400 ",
     },
   ];
 
