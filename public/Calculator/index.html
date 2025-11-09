@@ -1,0 +1,116 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        *
+{
+    margin: 0;
+}
+body
+{
+    display: flex;
+    justify-content: center;
+    padding:30px;
+}
+.calculator
+{
+    width: fit-content;
+    border: 1px solid #ccc;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+}
+#input
+{
+    padding: 10px;
+    margin: 20px 10px 20px 10px;
+    font-size: large;
+}
+.num
+{
+    width:90px;
+    height: 60px;
+    margin: 10px 10px 10px 10px;
+    background-color: white;
+    border: 1px solid rgb(106, 98, 98);
+    font-size: large;
+}
+.num:hover
+{
+    background-color: #f5efef;
+}
+
+    </style>
+    
+</head>
+<body>
+    <center>
+        <div class="calculator">
+    <h1>Calculator</h1>
+                <input type="text" name="input" id="input" >
+            <div id="button">
+                <button  class="num" onclick="aclr()">AC</button>
+                <button   class="num"onclick="sclr()">C</button>
+                <button class="num" onclick="operation('%')">%</button>
+                <button class="num" onclick="operation('+')">+</button>
+            </div>
+            <div id="button">
+                <button class="num" onclick="operation('1')">1</button>
+                <button class="num" onclick="operation('2')">2</button>
+                <button class="num" onclick="operation('3')">3</button>
+                <button class="num" onclick="operation('-')">-</button>
+            </div>
+            <div id="button">
+                <button class="num" onclick="operation('4')">4</button>
+                <button class="num" onclick="operation('5')">5</button>
+                <button class="num" onclick="operation('6')">6</button>
+                <button class="num" onclick="operation('*')">*</button>
+            </div>
+            <div id="button">
+                <button class="num" onclick="operation('7')">7</button>
+                <button class="num" onclick="operation('8')">8</button>
+                <button class="num" onclick="operation('9')">9</button>
+                <button class="num" onclick="operation('/')">/</button>
+            </div>
+            <div id="button">
+                <button class="num" onclick="operation('00')">00</button>
+                <button class="num" onclick="operation('0')">0</button>
+                <button class="num" onclick="operation('.')">.</button>
+                <button class="num" onclick="solve()">=</button>
+            </div>
+        
+        </div>
+</center>
+
+<script>
+    function operation(v)
+    {
+        document.getElementById('input').value=document.getElementById('input').value + v;
+
+    }
+    function aclr()
+    {
+        document.getElementById('input').value="";
+    }
+    function sclr()
+    {
+        var temp=document.getElementById('input').value;
+        var len=temp.length;
+        temp=temp.replace(temp[len-1],"");
+        document.getElementById('input').value = temp;
+    }
+    function solve()
+    {
+        var input=document.getElementById('input').value;
+        var res=eval(input);    
+        document.getElementById('input').value=res;
+
+    }
+</script>
+</body>
+</html

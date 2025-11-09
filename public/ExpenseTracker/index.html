@@ -1,0 +1,240 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Expenses Tracker</title>
+    <style>
+        body {
+            background-color: #1e1e2f;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #4caf50;
+            margin-bottom: 20px;
+        }
+
+        center {
+            padding: 20px;
+        }
+
+        form {
+            background-color: #2c2c3b;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 60%;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #4caf50;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        th, td {
+            padding: 10px;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #333348;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #2c2c3b;
+        }
+
+        input[type="text"] {
+            width: 90%;
+            padding: 10px;
+            border: 1px solid #4caf50;
+            border-radius: 5px;
+            background-color: #1e1e2f;
+            color: white;
+        }
+
+        input[type="button"] {
+            padding: 10px 20px;
+            color: white;
+            background-color: #4caf50;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="button"]:hover {
+            background-color: white;
+            color: black;
+            cursor: pointer;
+        }
+
+        #total {
+            font-size: 24px;
+            margin-top: 20px;
+            color: #ff5722;
+        }
+
+        button {
+            padding: 5px 15px;
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #e64a19;
+        }
+
+        button.edit {
+            background-color: #2196f3;
+        }
+
+        button.edit:hover {
+            background-color: #1976d2;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <center>
+            <h1>Expenses Tracker</h1>
+            <form>
+                <table>
+                    <tr>
+                        <th><label for="name">Product Name:</label></th>
+                        <td><input type="text" id="name" name="name" placeholder="Enter product name"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="cost">Cost:</label></th>
+                        <td><input type="text" id="cost" name="cost" placeholder="Enter product cost"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><input type="button" onclick="saveIn()" value="ADD"></td>
+                    </tr>
+                </table>
+            </form>
+            <h1 id="total">Total Expenses: 0</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Cost</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody id="row">
+                </tbody>
+            </table>
+        </center>
+    </div>
+    <script>
+        var total = 0;
+
+        window.onload = function () {
+            loadFromLocalStorage();
+        };
+
+        function saveIn() {
+            var name = document.getElementById("name").value;
+            var cost = parseInt(document.getElementById("cost").value);
+
+            if (!name || isNaN(cost)) {
+                alert("Please enter valid product name and cost.");
+                return;
+            }
+
+            var tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td>${name}</td>
+                <td>${cost}</td>
+                <td><button class="edit" onclick="editInfo(event)">Edit</button></td>
+                <td><button onclick="deleteInfo(event)">Delete</button></td>
+            `;
+
+            document.getElementById("row").appendChild(tr);
+
+            total += cost;
+            document.getElementById("total").innerText = "Total Expenses: " + total;
+
+            saveToLocalStorage(name, cost);
+
+            document.getElementById("name").value = "";
+            document.getElementById("cost").value = "";
+        }
+
+        function deleteInfo(event) {
+            var row = event.target.parentElement.parentElement;
+            var name = row.cells[0].innerText;
+            var cost = parseInt(row.cells[1].innerText);
+
+            total -= cost;
+            document.getElementById("total").innerText = "Total Expenses: " + total;
+
+            row.remove();
+            removeFromLocalStorage(name, cost);
+        }
+
+        function editInfo(event) {
+            var row = event.target.parentElement.parentElement;
+            var name = row.cells[0].innerText;
+            var cost = row.cells[1].innerText;
+
+            document.getElementById("name").value = name;
+            document.getElementById("cost").value = cost;
+
+            deleteInfo(event);
+        }
+
+        function saveToLocalStorage(name, cost) {
+            var expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+            expenses.push({ name: name, cost: cost });
+            localStorage.setItem('expenses', JSON.stringify(expenses));
+        }
+
+        function removeFromLocalStorage(name, cost) {
+            var expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+            expenses = expenses.filter(item => item.name !== name || item.cost !== cost);
+            localStorage.setItem('expenses', JSON.stringify(expenses));
+        }
+
+        function loadFromLocalStorage() {
+            var expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+            expenses.forEach(item => {
+                var tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${item.name}</td>
+                    <td>${item.cost}</td>
+                    <td><button class="edit" onclick="editInfo(event)">Edit</button></td>
+                    <td><button onclick="deleteInfo(event)">Delete</button></td>
+                `;
+                document.getElementById("row").appendChild(tr);
+                total += item.cost;
+            });
+            document.getElementById("total").innerText = "Total Expenses: " + total;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,477 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TNEB Bill Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="myscript.js"></script>
+    <style>
+
+* {
+    margin: 0;
+}
+body {
+    padding: 30px;
+}
+.calculator {
+    width: fit-content;
+    border: 1px solid #be8181;
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+}
+#input {
+    padding: 10px;
+    margin: 20px 10px 20px 10px;
+    font-size: large;
+}
+.num {
+    margin: 10px;
+    background-color: blue;
+    border: 1px solid white;
+    font-size: large;
+    border-radius: 40px;
+    padding: 15px;
+    color: white;
+    cursor: pointer;
+}
+.num:hover {
+    background-color: lightsteelblue;
+}
+table, tr, td , th{
+    border: 2px solid black;
+    color: black;
+    padding: 20px;
+    align-items: center;
+    border-collapse: collapse;
+}
+table{
+    padding: 0;
+}
+.show{
+    display: none;
+}
+.resultboxstyle{
+    font-weight: bold;
+    align-items: center;
+}
+td.singleline {
+    font-family: Arial, sans-serif; /* Choose a font with Unicode support */
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+
+
+
+        </style>
+
+</head>
+<body>
+    <center>
+        <div class="calculator">
+            <h1>TNEB Bill Calculator</h1>
+            <input type="text" name="input" id="input" placeholder="Enter the units">
+            <div id="button">
+                <button class="num" onclick="aclr()">Clear</button>
+                <button class="num" onclick="solve()">Calculate</button>
+            </div>
+            <br>
+            <h1 class="result" id="result">Bill Amount: &#8377;00.00</h1>
+        </div>
+
+        <br><br>
+
+        <table id="hundred" class="show">
+            <tr>
+                <th rowspan="2">Units(u)</th>
+                <th colspan="2">Unit Range</th>
+                <th rowspan="2">Unit Cost</th>
+            </tr>
+            <tr>
+                <th>From</th>
+                <th>To</th>
+            </tr>
+            <tr>
+                <td>&le;100</td>
+                <td>1</td>
+                <td>100</td>
+                <td>₹ 0</td>
+            </tr>
+            <tr>
+                <td id="resultbox1" colspan="4" class="resultboxstyle"></td>
+            </tr>
+        </table>
+
+        
+      <table class="show" id="twohundred">
+        <tr>
+            <th rowspan="2">Units(u)</th>
+            <th  colspan="2">Unit Range</th>
+            <th rowspan="2">Unit Cost</th>
+         </tr>
+            <tr>
+                <th>From</th>
+                <th>To</th>
+            </tr>
+        <tr>
+            <td rowspan="2">&le;200</td>
+            <td>1</td>
+            <td>100</td>
+            <td>₹ 0</td>
+        </tr>
+        <tr>
+            <td>101</td>
+            <td>200</td>
+            <td>₹ 2.35</td>
+        </tr>
+        <tr>
+            <td id="resultbox2" colspan="4" class="resultboxstyle"></td>
+        </tr>
+      </table>
+
+
+      <table class="show" id="fourhundred">
+        <tr>
+            <th rowspan="2">Units(u)</th>
+            <th  colspan="2">Unit Range</th>
+            <th rowspan="2">Unit Cost</th>
+         </tr>
+            <tr>
+                <th>From</th>
+                <th>To</th>
+            </tr>
+        <tr>
+            <td rowspan="3">&le;400</td>
+            <td>1</td>
+            <td>100</td>
+            <td>₹ 0</td>
+        </tr>
+        <tr>
+            <td>101</td>
+            <td>200</td>
+            <td>₹ 2.35</td>
+        </tr>
+        <tr>
+            <td>201</td>
+            <td>400</td>
+            <td>₹ 4.70</td>
+        </tr>
+        <tr>
+            <td id="resultbox4" colspan="4" class="resultboxstyle"></td>
+        </tr>
+      </table>
+
+      <table class="show" id="fivehundred">
+        <tr>
+            <th rowspan="2">Units(u)</th>
+            <th  colspan="2">Unit Range</th>
+            <th rowspan="2">Unit Cost</th>
+         </tr>
+            <tr>
+                <th>From</th>
+                <th>To</th>
+            </tr>
+
+
+        <tr>
+            <td rowspan="4">&le;500</td>
+            <td>1</td>
+            <td>100</td>
+            <td>₹ 0</td>
+        </tr>
+        <tr>
+            <td>101</td>
+            <td>200</td>
+            <td>₹ 2.35</td>
+        </tr>
+        <tr>
+            <td>201</td>
+            <td>400</td>
+            <td>₹ 4.70</td>
+        </tr>
+        <tr>
+            <td>401</td>
+            <td>500</td>
+            <td>₹ 6.30</td>
+        </tr>
+        <tr>
+            <td id="resultbox5" colspan="4" class="resultboxstyle"></td>
+        </tr>
+      </table>
+
+
+      <table class="show" id="sixhundred">
+        <tr>
+            <th rowspan="2">Units(u)</th>
+            <th  colspan="2">Unit Range</th>
+            <th rowspan="2">Unit Cost</th>
+         </tr>
+            <tr>
+                <th>From</th>
+                <th>To</th>
+            </tr>
+        <tr>
+            <td rowspan="4">&le;600</td>
+            <td>1</td>
+            <td>100</td>
+            <td>₹ 0</td>
+        </tr>
+        <tr>
+            <td>101</td>
+            <td>400</td>
+            <td>₹ 4.70</td>
+        </tr>
+        <tr>
+            <td>401</td>
+            <td>500</td>
+            <td>₹ 6.30</td>
+        </tr>
+        <tr>
+            <td>501</td>
+            <td>600</td>
+            <td>₹ 8.40</td>
+        </tr>
+        <tr>
+            <td id="resultbox6" colspan="4" class="resultboxstyle"></td>
+        </tr>
+      </table>
+        
+      <table class="show" id="eighthundred">
+        <tr>
+            <th rowspan="2">Units(u)</th>
+            <th  colspan="2">Unit Range</th>
+            <th rowspan="2">Unit Cost</th>
+         </tr>
+            <tr>
+                <th>From</th>
+                <th>To</th>
+            </tr>
+        <tr>
+            <td rowspan="5">&le;800</td>
+            <td>1</td>
+            <td>100</td>
+            <td>₹ 0</td>
+        </tr>
+        <tr>
+            <td>101</td>
+            <td>400</td>
+            <td>₹ 4.70</td>
+        </tr>
+        <tr>
+            <td>401</td>
+            <td>500</td>
+            <td>₹ 6.30</td>
+        </tr>
+        <tr>
+            <td>501</td>
+            <td>600</td>
+            <td>₹ 8.40</td>
+        </tr>
+        <tr>
+            <td>601</td>
+            <td>800</td>
+            <td>₹ 9.45</td>
+        </tr>
+        <tr>
+            <td id="resultbox8" colspan="4" class="resultboxstyle"></td>
+        </tr>
+      </table>
+
+
+        <table class="show" id="underthousand">
+            <tr>
+                <th rowspan="2">Units(u)</th>
+                <th  colspan="2">Unit Range</th>
+                <th rowspan="2">Unit Cost</th>
+             </tr>
+                <tr>
+                    <th>From</th>
+                    <th>To</th>
+                </tr>
+
+        
+        <tr>
+            <td rowspan="6">&le;1000</td>
+            <td>1</td>
+            <td>100</td>
+            <td>₹ 0</td>
+        </tr>
+        <tr>
+            <td>101</td>
+            <td>400</td>
+            <td>₹ 4.70</td>
+        </tr>
+        <tr>
+            <td>401</td>
+            <td>500</td>
+            <td>₹ 6.30</td>
+        </tr>
+        <tr>
+            <td>501</td>
+            <td>600</td>
+            <td>₹ 8.40</td>
+        </tr>
+        <tr>
+            <td>601</td>
+            <td>800</td>
+            <td>₹ 9.45</td>
+        </tr>
+        <tr>
+            <td>801</td>
+            <td>1000</td>
+            <td>₹ 10.50</td>
+        </tr>
+        <tr>
+            <td id="resultbox10" colspan="4" class="resultboxstyle"></td>
+        </tr>
+      </table>
+
+      <table class="show" id="infinity">
+        <tr>
+            <th rowspan="2">Units(u)</th>
+            <th  colspan="2">Unit Range</th>
+            <th rowspan="2">Unit Cost</th>
+         </tr>
+            <tr>
+                <th>From</th>
+                <th>To</th>
+            </tr>
+        <tr>
+            <td rowspan="7">>1000</td>
+            <td>1</td>
+            <td>100</td>
+            <td>₹ 0</td>
+        </tr>
+        <tr>
+            <td>101</td>
+            <td>400</td>
+            <td>₹ 4.70</td>
+        </tr>
+        <tr>
+            <td>401</td>
+            <td>500</td>
+            <td>₹ 6.30</td>
+        </tr>
+        <tr>
+            <td>501</td>
+            <td>600</td>
+            <td>₹ 8.40</td>
+        </tr>
+        <tr>
+            <td>601</td>
+            <td>800</td>
+            <td>₹ 9.45</td>
+        </tr>
+        <tr>
+            <td>801</td>
+            <td>1000</td>
+            <td>₹ 10.50</td>
+        </tr>
+        <tr>
+            <th colspan="2">>1000</th>
+            <td>₹ 11.55</td>
+        </tr>
+        <tr>
+            <td id="resultbox11" colspan="4" class="resultboxstyle"></td>
+        </tr>
+      </table>
+
+        </table>
+
+    </center>
+    <script>
+        
+        function aclr() {
+            document.getElementById('input').value = "";
+            document.getElementById('result').textContent = "Bill Amount: ₹00.00";
+            document.querySelectorAll('.show').forEach(table => {
+                table.style.display = 'none';
+            });
+        }
+
+        function solve() {
+            var input = parseFloat(document.getElementById('input').value);
+            var result = document.getElementById('result');
+            var result1 = document.getElementById('result1');
+            var result2 = document.getElementById('result2');
+            var result4 = document.getElementById('result4');
+            var result5 = document.getElementById('result5');
+            var result6 = document.getElementById('result6');
+            var result8 = document.getElementById('result8');
+            var result10 = document.getElementById('result10');
+            var result11 = document.getElementById('result11');
+            var hundred = document.getElementById('hundred');
+            var twohundred = document.getElementById('twohundred');
+            var fourhundred=document.getElementById('fourhundred');
+            var fivehundred=document.getElementById('fivehundred');
+            var sixhundred=document.getElementById('sixhundred');
+            var eighthundred=document.getElementById('eighthundred');
+            var underthousand=document.getElementById('underthousand');
+            var infinity=document.getElementById('infinity');
+
+            
+
+            document.querySelectorAll('.show').forEach(table => {
+                table.style.display = 'none';
+            });
+
+            if (input >= 0 && input <= 100) {
+    var belowhundred = input * 0;
+    result.textContent = "Bill Amount: ₹" + belowhundred;
+    resultbox1.textContent = "Bill Amount: ₹" + belowhundred;
+    hundred.style.display = "inline-block";
+    document.getElementById('input').value = "";
+} else if (input > 100 && input <= 200) {
+    var abovehundred =( (input - 100) * 2.35).toFixed(2);
+    result.textContent = "Bill Amount: ₹" + abovehundred;
+    resultbox2.textContent = "Bill Amount: ₹" + abovehundred;
+    twohundred.style.display = "inline-block";
+    document.getElementById('input').value = "";
+} else if (input > 200 && input <= 400) {
+    var abovetwohundred =( (100 * 0) + (100 * 2.35) + ((input - 200) * 4.70)).toFixed(2);
+    result.textContent = "Bill Amount: ₹" + abovetwohundred;
+    resultbox4.textContent = "Bill Amount: ₹" + abovetwohundred;
+    fourhundred.style.display = 'inline-block';
+    document.getElementById('input').value = "";
+} else if (input > 400 && input <= 500) {
+    var abovefourhundred =( (100 * 0) + (100 * 2.35) + (200 * 4.70) + ((input - 400) * 6.30)).toFixed(2);
+    result.textContent = "Bill Amount: ₹" + abovefourhundred;
+    resultbox5.textContent = "Bill Amount: ₹" + abovefourhundred;
+    fivehundred.style.display = 'inline-block';
+    document.getElementById('input').value = "";
+} else if (input > 500 && input <= 600) {
+    var abovefivehundred = ((100 * 0) + (300 * 4.70) + (100 * 6.30) + ((input - 500) * 8.40)).toFixed(2);
+    result.textContent = "Bill Amount: ₹" + abovefivehundred;
+    resultbox6.textContent = "Bill Amount: ₹" + abovefivehundred;
+    sixhundred.style.display = 'inline-block';
+    document.getElementById('input').value = "";
+} else if (input > 600 && input <= 800) {
+    var abovesixhundred = ((100 * 0) + (300 * 4.70) + (100 * 6.30) + (100 * 8.40) + ((input - 600) * 9.45)).toFixed(2);
+    result.textContent = "Bill Amount: ₹" + abovesixhundred;
+    resultbox8.textContent = "Bill Amount: ₹" + abovesixhundred;
+    eighthundred.style.display = 'inline-block';
+    document.getElementById('input').value = "";
+} else if (input > 800 && input <= 1000) {
+    var aboveeighthundred = ((100 * 0) + (300 * 4.70) + (100 * 6.30) + (100 * 8.40) + (200 * 9.45) + ((input - 800) * 10.50)).toFixed(2);
+    result.textContent = "Bill Amount: ₹" + aboveeighthundred;
+    resultbox10.textContent = "Bill Amount: ₹" + aboveeighthundred;
+    underthousand.style.display = 'inline-block';
+    document.getElementById('input').value = "";
+} else if (input > 1000) {
+    var abovethousand = ((100 * 0) + (300 * 4.70) + (100 * 6.30) + (100 * 8.40) + (200 * 9.45) + (200 * 10.50) + ((input - 1000) * 11.55)).toFixed(2);
+    result.textContent = "Bill Amount: ₹" + abovethousand;
+    resultbox11.textContent = "Bill Amount: ₹" + abovethousand;
+    infinity.style.display = 'inline-block';
+    document.getElementById('input').value = "";
+}
+
+        }
+    
+    </script>
+
+</body>
+</html>

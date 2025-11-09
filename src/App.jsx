@@ -89,6 +89,46 @@ function App() {
             {/* Individual Pages */}
             <Route path="/oldproject" element={<Preloader />} />
 
+            <Route
+              path="/jsscrackers"
+              element={
+                <iframe
+                  src="/JssCrackers/index.html"
+                  style={{ width: "100%", height: "100vh", border: "none" }}
+                  title="Jss Crackers"
+                />
+              }
+            />
+            <Route
+              path="/calculator"
+              element={
+                <iframe
+                  src="/Calculator/index.html"
+                  style={{ width: "100%", height: "100vh", border: "none" }}
+                  title="Calculator"
+                />
+              }
+            />
+            <Route
+              path="/tneb"
+              element={
+                <iframe
+                  src="/TNEB/index.html"
+                  style={{ width: "100%", height: "100vh", border: "none" }}
+                  title="TNEB bill calculator"
+                />
+              }
+            />
+            <Route
+              path="/expensetracker"
+              element={
+                <iframe
+                  src="/ExpenseTracker/index.html"
+                  style={{ width: "100%", height: "100vh", border: "none" }}
+                  title="Expense Tracker"
+                />
+              }
+            />
             {/* Fallback Route */}
             <Route
               path="*"
