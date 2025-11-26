@@ -44,6 +44,46 @@ const projects = [
     demo: 'https://tancetquiz.vercel.app',
     image: 'https://res.cloudinary.com/dlfan4caj/image/upload/v1744426184/project7_xmkuu9.png',
   },
+  {
+    id: 5,
+    title: 'Expenses Tracker',
+    description:
+      "An expense tracker website that uses JavaScript to manage and store user data locally in the browser's local storage for easy access and tracking.",
+    tech: ["HTML", "CSS", "JavaScript"],
+    link: 'https://sudhakar-portfolio.vercel.app/expensetracker',
+    github: "#",
+    image: 'https://res.cloudinary.com/dlfan4caj/image/upload/v1744426177/project4_kehepi.png',
+  },
+  {
+    id: 6,
+    title: 'Crackers Website',
+    description:
+      'A **Crackers Website** built using HTML, CSS, and JavaScript that allows users to browse, select, and purchase various firecrackers online with an interactive and responsive design.',
+    tech: ["HTML", "CSS", "JavaScript"],
+    link: 'https://sudhakar-portfolio.vercel.app/jsscrackers',
+    github: "#",
+    image: 'https://res.cloudinary.com/dlfan4caj/image/upload/v1744426187/project3_go2iqo.png',
+  },
+  {
+    id: 7,
+    title: 'TNEB Bill Calculator',
+    description:
+      'A **TNEB Bill Calculator Website** built using HTML and CSS that helps users calculate their Tamil Nadu Electricity Board (TNEB) bill based on consumption and tariff rates.',
+    tech: ["HTML", "CSS", "JavaScript"],
+    link: 'https://sudhakar-portfolio.vercel.app/tneb',
+    github: "#",
+    image: 'https://res.cloudinary.com/dlfan4caj/image/upload/v1744426175/project2_lqrera.png',
+  },
+  {
+    id: 8,
+    title: 'Simple Calculator',
+    description:
+      'A **Calculator Website** built using HTML and CSS that provides a user-friendly interface for performing basic arithmetic operations and simple calculations.',
+    tech: ["HTML", "CSS", "JavaScript"],
+    demo: 'https://sudhakar-portfolio.vercel.app/calculator',
+    github: "#",
+    image: 'https://res.cloudinary.com/dlfan4caj/image/upload/v1744426175/project1_m0wr0b.png',
+  },
 ];
 
 const Projects = () => {
