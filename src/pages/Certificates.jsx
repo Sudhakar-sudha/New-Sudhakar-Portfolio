@@ -35,11 +35,10 @@ const Certificates = () => {
       title: "Python",
       issuer: "Ayya Nadar Janaki Ammal College",
       date: "2023",
-      image:
-        "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=300&h=200&fit=crop",
+      image: "./python.jpg",
       description:
         "Explored Python basics, including libraries like NumPy and Matplotlib.",
-      link: "#",
+      link: "https://drive.google.com/file/d/18Ztt7jbIgvprVPQjxrRRHldV8NDS2UN6/view?usp=sharing",
     },
     {
       title: "Data Structures and Algorithms using Java",
@@ -49,6 +48,15 @@ const Certificates = () => {
       description:
         "Learned core data structures and algorithms and applied them with Java.",
       link: "https://drive.google.com/file/d/1jfzDARPlOOqKqvzyRsgZaF03qMAl2VEA/view?usp=sharing",
+    },
+    {
+      title: "Cloud Computing",
+      issuer: "NPTEL",
+      date: "2025",
+      image: "./CloudComputing.jpg",
+      description:
+        "Learned core cloud computing concepts such as virtualization, cloud service models, scalability, and secure deployment of cloud-based applications.",
+      link: "https://drive.google.com/file/d/1-neLF14ZfKIBPBr9TbyyKlPvH8X7ws_3/view?usp=sharing",
     },
   ];
 

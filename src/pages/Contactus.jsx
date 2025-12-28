@@ -22,7 +22,7 @@ const Contact = () => {
 
     try {
       const res = await axios.post("https://localestartup-backend.onrender.com/api/sudhakar/contact", data);
-      console.log(res);
+      // console.log(res);
       if (res.data.success) {
         setSent(true);
         e.target.reset();

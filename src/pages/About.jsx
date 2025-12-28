@@ -5,36 +5,41 @@ import { motion } from "framer-motion";
 const Aboutus = () => {
 
   return (
-    <div id="about" className="">
-      <div className="flex flex-col lg:flex-row bg-black p-4 pt-12 sm:p-6 md:p-8 lg:p-10 xl:p-2 md:items-center">
+    <div id="about" className="bg-black text-white pt-8">
+      
+      {/* Main Container */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-14">
 
-        {/* Mobile About Us Heading */}
-        <div className="lg:hidden flex justify-center -mt-1">
-          <h1 className="inline-flex text-3xl sm:text-4xl text-white font-bold border-b-4 pb-3 border-blue-500 glow-effect mt-8 mb-8">
-            About
-            <p className="ml-2 sm:ml-3">Me</p>
+        {/* Mobile Heading */}
+        <div className="lg:hidden flex justify-center mb-10">
+          <h1 className="text-3xl sm:text-4xl font-bold border-b-4 border-blue-500 pb-2 glow-effect">
+            About <span className="ml-2">Me</span>
           </h1>
         </div>
 
-        {/* Image Section */}
-        <div className="flex justify-center items-center lg:flex-1 mb-6 md:mb-0">
-          <img
-            src="./sudhakar.png"
-            alt="Sudhakar Profile"
-            className="w-80 sm:w-80 md:w-100 lg:w-100 xl:w-100 h-auto border-2 border-blue-600 bg-black custom-dark-blue-shadow rounded-lg object-contain"
-          />
-        </div>
+        {/* Content Wrapper */}
+        <div className="flex flex-col lg:flex-row items-center gap-10">
 
-        {/* About Me Content Section */}
-        <div className="lg:flex-1 md:mt-10 lg:mt-14 p-3 sm:p-5">
-
-          {/* Desktop About Me Heading */}
-          <div className="hidden lg:flex">
-            <h1 className="inline-flex text-3xl lg:text-4xl text-white font-bold border-b-4 pb-3 border-blue-500 mb-5 glow-effect">
-              About
-              <p className="ml-2 lg:ml-3">Me</p>
-            </h1>
+          {/* Image Section */}
+          <div className="w-full lg:w-1/2 flex justify-center">
+            <img
+              src="./sudhakar.png"
+              alt="Sudhakar Profile"
+              className="w-64 sm:w-72 md:w-80 lg:w-[380px] 
+                         rounded-xl border-2 border-blue-600 
+                         object-contain shadow-lg custom-dark-blue-shadow"
+            />
           </div>
+
+          {/* Text Section */}
+          <div className="w-full lg:w-1/2">
+
+            {/* Desktop Heading */}
+            <div className="hidden lg:block mb-6">
+              <h1 className="text-4xl font-bold border-b-4 border-blue-500 inline-block pb-2 glow-effect">
+                About <span className="ml-2">Me</span>
+              </h1>
+            </div>
 
           <motion.div
             className="rounded-2xl shadow-lg space-y-6 bg-black/30 backdrop-blur-sm"
@@ -73,54 +78,53 @@ const Aboutus = () => {
               that helps students and startups transform ideas into deployable digital solutions.
             </p>
 
-            <motion.div
-              className="text-center mt-6"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <a
-                href="https://localestartup.vercel.app"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block bg-blue-700 cursor-pointer text-white font-semibold px-6 py-3 rounded-full shadow-md hover:shadow-xl transition-all"
+              <motion.div
+                className="text-center pt-4"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                🌐 Visit LocalEStartup
-              </a>
+                <a
+                  href="https://localestartup.vercel.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-blue-700 px-6 py-3 rounded-full font-semibold hover:bg-blue-800 transition"
+                >
+                  🌐 Visit LocalEStartup
+                </a>
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
+
+        {/* Stats Section */}
+        <motion.div
+          className="mt-16 text-center"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-3xl font-bold mb-8">⚡ My Achievements</h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div className="p-6 bg-white/10 rounded-xl border border-white/20">
+              <h3 className="text-3xl font-bold text-blue-400">5+</h3>
+              <p className="text-gray-300">Live Projects</p>
+            </div>
+
+            <div className="p-6 bg-white/10 rounded-xl border border-white/20">
+              <h3 className="text-3xl font-bold text-green-400">1+</h3>
+              <p className="text-gray-300">Years Experience</p>
+            </div>
+
+            <div className="p-6 bg-white/10 rounded-xl border border-white/20">
+              <h3 className="text-3xl font-bold text-purple-400">5+</h3>
+              <p className="text-gray-300">Students Guided</p>
+            </div>
+          </div>
+        </motion.div>
+
       </div>
-
-      {/* Stats Section */}
-      <motion.div
-        className="mt-10 text-center"
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-      >
-        <h2 className="text-3xl font-bold text-white mb-6">
-          <span className="text-white">⚡ My Achievements</span>
-        </h2>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6 p-10">
-          <div className="text-center p-6 bg-white/10 rounded-xl border border-white/20">
-            <div className="text-3xl font-bold text-blue-400 mb-2">5+</div>
-            <div className="text-gray-300">Live Projects</div>
-          </div>
-
-          <div className="text-center p-6 bg-white/10 rounded-xl border border-white/20">
-            <div className="text-3xl font-bold text-green-400 mb-2">1+</div>
-            <div className="text-gray-300">Years Experience</div>
-          </div>
-
-          <div className="text-center p-6 bg-white/10 rounded-xl border border-white/20">
-            <div className="text-3xl font-bold text-purple-400 mb-2">5+</div>
-            <div className="text-gray-300">Students Guided</div>
-          </div>
-        </div>
-      </motion.div>
-
     </div>
   );
 };

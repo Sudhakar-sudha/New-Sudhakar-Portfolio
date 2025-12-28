@@ -4,18 +4,9 @@ import { Github, Globe } from "lucide-react";
 import ParticlesBackground from "../components/ParticlesBackground";
 
 const projects = [
+
   {
     id: 1,
-    title: "V Print Tech",
-    description:
-      '"V Print Tech" is a printing offset website developed using the MERN stack in collaboration with Satheeshbabu.',
-    tech: ["Reactjs", "Nodejs", "Expressjs", "Mongodb"],
-    github: "https://github.com/yourusername/smart-attendance-system",
-    demo: "https://vprinttech.netlify.app/",
-    image: 'https://res.cloudinary.com/dlfan4caj/image/upload/v1744426189/project6_nhqiuc.png',
-  },
-  {
-    id: 2,
     title: "Portfolio Website",
     description:
       "A personal portfolio website built using React, Tailwind CSS, and Framer Motion to showcase projects, skills, and experience.",
@@ -25,7 +16,7 @@ const projects = [
     image: 'https://res.cloudinary.com/dlfan4caj/image/upload/v1744426183/project5_yf0qlb.png',
   },
   {
-    id: 3,
+    id: 2,
     title: "LocalEStartup",
     description:
       "LocalEStartup is a user-friendly e-commerce platform that connects local startups with customers to boost visibility and sales. It enables easy product browsing, secure ordering, and fast delivery through a dedicated seller and delivery system.",
@@ -33,6 +24,16 @@ const projects = [
     github: "https://github.com/yourusername/ecommerce-app",
     demo: 'https://localestartup.vercel.app/',
     image: 'https://res.cloudinary.com/dlfan4caj/image/upload/v1744426185/project8_x8v9yc.png',
+  },
+  {
+    id: 3,
+    title: "V Print Tech",
+    description:
+      '"V Print Tech" is a printing offset website developed using the MERN stack in collaboration with Satheeshbabu.',
+    tech: ["Reactjs", "Nodejs", "Expressjs", "Mongodb"],
+    github: "https://github.com/yourusername/smart-attendance-system",
+    demo: "https://vprinttech.netlify.app/",
+    image: 'https://res.cloudinary.com/dlfan4caj/image/upload/v1744426189/project6_nhqiuc.png',
   },
   {
     id: 4,
@@ -50,7 +51,7 @@ const projects = [
     description:
       "An expense tracker website that uses JavaScript to manage and store user data locally in the browser's local storage for easy access and tracking.",
     tech: ["HTML", "CSS", "JavaScript"],
-    link: 'https://sudhakar-portfolio.vercel.app/expensetracker',
+    demo: 'https://sudhakar-portfolio.vercel.app/expensetracker',
     github: "#",
     image: 'https://res.cloudinary.com/dlfan4caj/image/upload/v1744426177/project4_kehepi.png',
   },
@@ -60,7 +61,7 @@ const projects = [
     description:
       'A **Crackers Website** built using HTML, CSS, and JavaScript that allows users to browse, select, and purchase various firecrackers online with an interactive and responsive design.',
     tech: ["HTML", "CSS", "JavaScript"],
-    link: 'https://sudhakar-portfolio.vercel.app/jsscrackers',
+    demo: 'https://sudhakar-portfolio.vercel.app/jsscrackers',
     github: "#",
     image: 'https://res.cloudinary.com/dlfan4caj/image/upload/v1744426187/project3_go2iqo.png',
   },
@@ -70,7 +71,7 @@ const projects = [
     description:
       'A **TNEB Bill Calculator Website** built using HTML and CSS that helps users calculate their Tamil Nadu Electricity Board (TNEB) bill based on consumption and tariff rates.',
     tech: ["HTML", "CSS", "JavaScript"],
-    link: 'https://sudhakar-portfolio.vercel.app/tneb',
+    demo: 'https://sudhakar-portfolio.vercel.app/tneb',
     github: "#",
     image: 'https://res.cloudinary.com/dlfan4caj/image/upload/v1744426175/project2_lqrera.png',
   },
@@ -92,7 +93,7 @@ const Projects = () => {
       <ParticlesBackground />
 
       {/* Section Heading */}
-      <div className="text-center mb-12">
+      <div className="text-center mb-12 pt-10">
         <h2 className="text-4xl font-bold border-b-4 border-blue-500 inline-block pb-3 glow-effect">
           Projects
         </h2>
