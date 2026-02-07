@@ -56,6 +56,7 @@ import Certificates from "./pages/Certificates";
 import Contact from "./pages/Contactus";
 
 import Preloader from "./OldPortfolio/Preloader"
+import RoseDayProposal from "./ValentinesDay/RoseDayProposal";
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -88,6 +89,8 @@ function App() {
 
             {/* Individual Pages */}
             <Route path="/oldproject" element={<Preloader />} />
+
+            <Route path="/rosedayproposal" element={<RoseDayProposal />} />
 
             <Route
               path="/jsscrackers"
