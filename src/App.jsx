@@ -57,6 +57,7 @@ import Contact from "./pages/Contactus";
 
 import Preloader from "./OldPortfolio/Preloader"
 import RoseDayProposal from "./ValentinesDay/RoseDayProposal";
+import ProposeDay from "./ValentinesDay/ProposeDay";
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -91,6 +92,7 @@ function App() {
             <Route path="/oldproject" element={<Preloader />} />
 
             <Route path="/rosedayproposal" element={<RoseDayProposal />} />
+            <Route path="/proposeday" element={<ProposeDay />} />
 
             <Route
               path="/jsscrackers"
