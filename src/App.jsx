@@ -64,6 +64,7 @@ import PromiseDay from "./ValentinesDay/PromiseDay";
 import HugDay from "./ValentinesDay/HugDay";
 import KissDayCard from "./ValentinesDay/KissDay";
 import ValentineProposal from "./ValentinesDay/ValentinesDay";
+import LoveJourneyDashboard from "./ValentinesDay/AllDay";
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -105,6 +106,7 @@ function App() {
             <Route path="/hugday" element={<HugDay />} />
             <Route path="/kissday" element={<KissDayCard />} />
             <Route path="/valentinesday" element={<ValentineProposal />} />
+            <Route path="/allday" element={<LoveJourneyDashboard />} />
 
             <Route
               path="/jsscrackers"
