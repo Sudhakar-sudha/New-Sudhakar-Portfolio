@@ -106,7 +106,7 @@ function App() {
             <Route path="/hugday" element={<HugDay />} />
             <Route path="/kissday" element={<KissDayCard />} />
             <Route path="/valentinesday" element={<ValentineProposal />} />
-            <Route path="/allday" element={<LoveJourneyDashboard />} />
+            <Route path="/keeruma" element={<LoveJourneyDashboard />} />
 
             <Route
               path="/jsscrackers"
