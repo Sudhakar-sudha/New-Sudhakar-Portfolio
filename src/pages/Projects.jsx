@@ -11,42 +11,52 @@ const projects = [
     description:
       "A personal portfolio website built using React, Tailwind CSS, and Framer Motion to showcase projects, skills, and experience.",
     tech: ["React", "Tailwind CSS", "Framer Motion"],
-    github: "https://github.com/yourusername/portfolio",
+    github: "https://github.com/Sudhakar-sudha/New-Sudhakar-Portfolio",
     demo: "https://sudhakar-portfolio.vercel.app",
     image: 'https://res.cloudinary.com/dlfan4caj/image/upload/v1744426183/project5_yf0qlb.png',
   },
   {
     id: 2,
+    title: "Evol Chat Application",
+    description:
+      "Evol is a simple and fast real-time chat application that allows users to send and receive messages instantly. It is designed to be easy to use, reliable, and responsive, providing a smooth communication experience for everyday use.",
+    tech: ["ReactNative", "Node.js", "Express.js", "MongoDB"],
+    github: "https://github.com/Sudhakar-sudha/evol",
+    demo: 'https://drive.google.com/file/d/15IxRM2xZ5lW0Ki6XkaECqAF7fH4iprWj/view?usp=sharing',
+    image: 'https://res.cloudinary.com/dlfan4caj/image/upload/v1767320579/college_projects/chef_1767320547689.jpg',
+  },
+  {
+    id: 3,
     title: "LocalEStartup",
     description:
       "LocalEStartup is a user-friendly e-commerce platform that connects local startups with customers to boost visibility and sales. It enables easy product browsing, secure ordering, and fast delivery through a dedicated seller and delivery system.",
     tech: ["React", "Node.js", "Express.js", "MongoDB"],
-    github: "https://github.com/yourusername/ecommerce-app",
+    github: "https://github.com/Sudhakar-sudha/LocalEStartup-Frontend",
     demo: 'https://localestartup.vercel.app/',
-    image: 'https://res.cloudinary.com/dlfan4caj/image/upload/v1744426185/project8_x8v9yc.png',
+    image: 'https://res.cloudinary.com/dlfan4caj/image/upload/v1767203759/localestartupe_cabyfj.png',
   },
   {
-    id: 3,
+    id: 4,
     title: "V Print Tech",
     description:
       '"V Print Tech" is a printing offset website developed using the MERN stack in collaboration with Satheeshbabu.',
     tech: ["Reactjs", "Nodejs", "Expressjs", "Mongodb"],
-    github: "https://github.com/yourusername/smart-attendance-system",
+    github: "https://github.com/Sudhakar-sudha",
     demo: "https://vprinttech.netlify.app/",
-    image: 'https://res.cloudinary.com/dlfan4caj/image/upload/v1744426189/project6_nhqiuc.png',
+    image: 'https://res.cloudinary.com/dlfan4caj/image/upload/v1767203772/vprinttech_f7nggk.png',
   },
   {
-    id: 4,
+    id: 5,
     title: "Tancet Quiz",
     description:
       'The **TANCET Quiz Website** is an interactive platform designed to help students prepare for the Tamil Nadu Common Entrance Test with mock tests, instant results, and anti-cheating features. It offers a seamless, mobile-friendly experience with real-time assessments and performance analytics.',
     tech: ["React", "Node.js", "Express.js", "MongoDB"],
-    github: "https://github.com/yourusername/ecommerce-app",
+    github: "https://github.com/Sudhakar-sudha/TancetQuiz",
     demo: 'https://tancetquiz.vercel.app',
-    image: 'https://res.cloudinary.com/dlfan4caj/image/upload/v1744426184/project7_xmkuu9.png',
+    image: 'https://res.cloudinary.com/dlfan4caj/image/upload/v1767203758/tancet_ynnaia.png',
   },
   {
-    id: 5,
+    id: 6,
     title: 'Expenses Tracker',
     description:
       "An expense tracker website that uses JavaScript to manage and store user data locally in the browser's local storage for easy access and tracking.",
@@ -56,17 +66,17 @@ const projects = [
     image: 'https://res.cloudinary.com/dlfan4caj/image/upload/v1744426177/project4_kehepi.png',
   },
   {
-    id: 6,
+    id: 7,
     title: 'Crackers Website',
     description:
       'A **Crackers Website** built using HTML, CSS, and JavaScript that allows users to browse, select, and purchase various firecrackers online with an interactive and responsive design.',
     tech: ["HTML", "CSS", "JavaScript"],
     demo: 'https://sudhakar-portfolio.vercel.app/jsscrackers',
     github: "#",
-    image: 'https://res.cloudinary.com/dlfan4caj/image/upload/v1744426187/project3_go2iqo.png',
+    image: 'https://res.cloudinary.com/dlfan4caj/image/upload/v1753888090/Crackers_j4pimy.png',
   },
   {
-    id: 7,
+    id: 8,
     title: 'TNEB Bill Calculator',
     description:
       'A **TNEB Bill Calculator Website** built using HTML and CSS that helps users calculate their Tamil Nadu Electricity Board (TNEB) bill based on consumption and tariff rates.',
@@ -76,7 +86,7 @@ const projects = [
     image: 'https://res.cloudinary.com/dlfan4caj/image/upload/v1744426175/project2_lqrera.png',
   },
   {
-    id: 8,
+    id: 9,
     title: 'Simple Calculator',
     description:
       'A **Calculator Website** built using HTML and CSS that provides a user-friendly interface for performing basic arithmetic operations and simple calculations.',
