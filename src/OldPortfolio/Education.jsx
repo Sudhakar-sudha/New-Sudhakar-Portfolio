@@ -64,7 +64,7 @@ Finished secondary education at S.H.N.V. Matriculation Higher Secondary School, 
             <div className="timeline-content">
               <h2>Project</h2>
               <p>
-              For my final year project, I developed **LocalEStartup**, an e-commerce platform designed to support local startups. It includes a **website for sellers** to easily add, update, and manage their products. A separate **mobile app for users** allows them to browse products, place orders, and make secure payments. Additionally, a **delivery boy app** helps track and manage deliveries, ensuring timely and efficient service. This system connects sellers, buyers, and delivery personnel in one streamlined platform to support local business growth.
+              For my final year project, I developed **LesShop**, an e-commerce platform designed to support local startups. It includes a **website for sellers** to easily add, update, and manage their products. A separate **mobile app for users** allows them to browse products, place orders, and make secure payments. Additionally, a **delivery boy app** helps track and manage deliveries, ensuring timely and efficient service. This system connects sellers, buyers, and delivery personnel in one streamlined platform to support local business growth.
                </p>
             </div>
           </div>

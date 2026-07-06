@@ -84,7 +84,7 @@ const Aboutus = () => {
                 whileTap={{ scale: 0.95 }}
               >
                 <a
-                  href="https://localestartup.vercel.app"
+                  href="https://localestartup.in"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-block bg-blue-700 px-6 py-3 rounded-full font-semibold hover:bg-blue-800 transition"

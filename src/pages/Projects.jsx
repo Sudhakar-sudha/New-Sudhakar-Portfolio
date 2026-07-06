@@ -27,12 +27,12 @@ const projects = [
   },
   {
     id: 3,
-    title: "LocalEStartup",
+    title: "LesShop",
     description:
-      "LocalEStartup is a user-friendly e-commerce platform that connects local startups with customers to boost visibility and sales. It enables easy product browsing, secure ordering, and fast delivery through a dedicated seller and delivery system.",
+      "LesShop is a user-friendly e-commerce platform that connects local startups with customers to boost visibility and sales. It enables easy product browsing, secure ordering, and fast delivery through a dedicated seller and delivery system.",
     tech: ["React", "Node.js", "Express.js", "MongoDB"],
     github: "https://github.com/Sudhakar-sudha/LocalEStartup-Frontend",
-    demo: 'https://localestartup.vercel.app/',
+    demo: 'https://lesshop.vercel.app/',
     image: 'https://res.cloudinary.com/dlfan4caj/image/upload/v1767203759/localestartupe_cabyfj.png',
   },
   {

@@ -55,7 +55,7 @@ const Header = () => {
                             transition={{ delay: 0.3, duration: 0.6 }}
                         >
                             <a
-                                href="https://localestartup.vercel.app"
+                                href="https://localestartup.in"
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >

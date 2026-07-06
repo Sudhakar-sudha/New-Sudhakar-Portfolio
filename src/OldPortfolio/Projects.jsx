@@ -60,9 +60,9 @@ export const Projects = () => {
             link: 'https://tancetquiz.vercel.app/',
     },  {
       image: 'https://res.cloudinary.com/dlfan4caj/image/upload/v1744426185/project8_x8v9yc.png',
-      title: 'LocalEStartup',
-      description:'LocalEStartup is a user-friendly e-commerce platform that connects local startups with customers to boost visibility and sales. It enables easy product browsing, secure ordering, and fast delivery through a dedicated seller and delivery system.', 
-       link: 'https://localestartup.vercel.app/',
+      title: 'LesShop',
+      description:'LesShop is a user-friendly e-commerce platform that connects local startups with customers to boost visibility and sales. It enables easy product browsing, secure ordering, and fast delivery through a dedicated seller and delivery system.', 
+       link: 'https://LesShop.vercel.app/',
     }
   ];
 
