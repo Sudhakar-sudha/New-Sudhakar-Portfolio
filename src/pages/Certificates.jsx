@@ -1,170 +1,229 @@
 import React from "react";
-import { motion } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+  useReducedMotion,
+} from "framer-motion";
 import { Award, ExternalLink, Calendar } from "lucide-react";
 
+/* ------------------------------------------------------------------ */
+/* Data                                                                */
+/* ------------------------------------------------------------------ */
+
+const certificates = [
+  {
+    title: "Diploma in Computer Application",
+    issuer: "Mannivel Institute",
+    date: "2022",
+    image: "./DCA.jpg",
+    description:
+      "Learned basic C and C++ programming along with Microsoft Word, Excel, and PowerPoint.",
+    link: "https://drive.google.com/file/d/1UmEue6JSl7zBooJiwNnUA4k2tkRiWgkw/view",
+  },
+  {
+    title: "Diploma in Computer Hardware and Servicing",
+    issuer: "Ayya Nadar Janaki Ammal College, Sivakasi",
+    date: "2023",
+    image: "./ANJAC.jpg",
+    description:
+      "Gained practical knowledge in computer hardware and basic software servicing.",
+    link: "https://drive.google.com/file/d/1_ODQjOKBf1ODgLzRgK5T-g_N0UcSVCoy/view",
+  },
+  {
+    title: "Diploma in Desktop Publishing",
+    issuer: "Easy Computers, Sivakasi",
+    date: "2023",
+    image: "./DTP.jpg",
+    description:
+      "Learned Coral Draw and Adobe Photoshop for professional graphic design projects.",
+    link: "https://drive.google.com/file/d/12S8eTWqCqVX_rS9WJdxJBLvn67c8ZmRr/view",
+  },
+  {
+    title: "Python",
+    issuer: "Ayya Nadar Janaki Ammal College",
+    date: "2023",
+    image: "./python.jpg",
+    description:
+      "Explored Python basics, including libraries like NumPy and Matplotlib.",
+    link: "https://drive.google.com/file/d/18Ztt7jbIgvprVPQjxrRRHldV8NDS2UN6/view?usp=sharing",
+  },
+  {
+    title: "Data Structures and Algorithms using Java",
+    issuer: "NPTEL",
+    date: "2024",
+    image: "./DSA.jpg",
+    description:
+      "Learned core data structures and algorithms and applied them with Java.",
+    link: "https://drive.google.com/file/d/1jfzDARPlOOqKqvzyRsgZaF03qMAl2VEA/view?usp=sharing",
+  },
+  {
+    title: "Cloud Computing",
+    issuer: "NPTEL",
+    date: "2025",
+    image: "./CloudComputing.jpg",
+    description:
+      "Learned core cloud computing concepts such as virtualization, cloud service models, scalability, and secure deployment of cloud-based applications.",
+    link: "https://drive.google.com/file/d/1-neLF14ZfKIBPBr9TbyyKlPvH8X7ws_3/view?usp=sharing",
+  },
+];
+
+/* ------------------------------------------------------------------ */
+/* Light background (white base + soft blue glow blobs)                */
+/* ------------------------------------------------------------------ */
+
+const BLOBS = [
+  { pos: "-left-24 top-[0%] h-60 w-60 sm:h-96 sm:w-96", color: "bg-lightblue-300/40", depth: -90, drift: 28, time: 10 },
+  { pos: "-right-24 top-[22%] h-56 w-56 sm:h-80 sm:w-80", color: "bg-lightblue-200/60", depth: 120, drift: -34, time: 11 },
+  { pos: "left-[14%] top-[50%] h-52 w-52 sm:h-80 sm:w-80", color: "bg-darkblue-500/20", depth: -140, drift: 36, time: 12 },
+  { pos: "-right-20 top-[75%] h-60 w-60 sm:h-96 sm:w-96", color: "bg-lightblue-300/50", depth: 90, drift: -26, time: 9.5 },
+];
+
+function Blob({ pos, color, depth, drift, time, mx, my, reduce }) {
+  const x = useTransform(mx, (v) => v * depth);
+  const y = useTransform(my, (v) => v * depth);
+
+  return (
+    <motion.div
+      aria-hidden="true"
+      style={reduce ? undefined : { x, y }}
+      className={`pointer-events-none absolute ${pos}`}
+    >
+      <motion.div
+        className={`h-full w-full rounded-full blur-3xl ${color}`}
+        animate={reduce ? undefined : { y: [0, drift, 0], scale: [1, 1.12, 1] }}
+        transition={{ duration: time, repeat: Infinity, ease: "easeInOut" }}
+      />
+    </motion.div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Component                                                           */
+/* ------------------------------------------------------------------ */
+
 const Certificates = () => {
-  const certificates = [
-    {
-      title: "Diploma in Computer Application",
-      issuer: "Mannivel Institute",
-      date: "2022",
-      image: "./DCA.jpg",
-      description:
-        "Learned basic C and C++ programming along with Microsoft Word, Excel, and PowerPoint.",
-      link: "https://drive.google.com/file/d/1UmEue6JSl7zBooJiwNnUA4k2tkRiWgkw/view",
-    },
-    {
-      title: "Diploma in Computer Hardware and Servicing",
-      issuer: "Ayya Nadar Janaki Ammal College, Sivakasi",
-      date: "2023",
-      image: "./ANJAC.jpg",
-      description:
-        "Gained practical knowledge in computer hardware and basic software servicing.",
-      link: "https://drive.google.com/file/d/1_ODQjOKBf1ODgLzRgK5T-g_N0UcSVCoy/view",
-    },
-    {
-      title: "Diploma in Desktop Publishing",
-      issuer: "Easy Computers, Sivakasi",
-      date: "2023",
-      image: "./DTP.jpg",
-      description:
-        "Learned Coral Draw and Adobe Photoshop for professional graphic design projects.",
-      link: "https://drive.google.com/file/d/12S8eTWqCqVX_rS9WJdxJBLvn67c8ZmRr/view",
-    },
-    {
-      title: "Python",
-      issuer: "Ayya Nadar Janaki Ammal College",
-      date: "2023",
-      image: "./python.jpg",
-      description:
-        "Explored Python basics, including libraries like NumPy and Matplotlib.",
-      link: "https://drive.google.com/file/d/18Ztt7jbIgvprVPQjxrRRHldV8NDS2UN6/view?usp=sharing",
-    },
-    {
-      title: "Data Structures and Algorithms using Java",
-      issuer: "NPTEL",
-      date: "2024",
-      image: "./DSA.jpg",
-      description:
-        "Learned core data structures and algorithms and applied them with Java.",
-      link: "https://drive.google.com/file/d/1jfzDARPlOOqKqvzyRsgZaF03qMAl2VEA/view?usp=sharing",
-    },
-    {
-      title: "Cloud Computing",
-      issuer: "NPTEL",
-      date: "2025",
-      image: "./CloudComputing.jpg",
-      description:
-        "Learned core cloud computing concepts such as virtualization, cloud service models, scalability, and secure deployment of cloud-based applications.",
-      link: "https://drive.google.com/file/d/1-neLF14ZfKIBPBr9TbyyKlPvH8X7ws_3/view?usp=sharing",
-    },
-  ];
+  const reduce = useReducedMotion();
+
+  // pointer parallax for blobs
+  const mxRaw = useMotionValue(0);
+  const myRaw = useMotionValue(0);
+  const mx = useSpring(mxRaw, { stiffness: 40, damping: 18 });
+  const my = useSpring(myRaw, { stiffness: 40, damping: 18 });
+
+  // pointer spotlight (px inside section)
+  const spotXRaw = useMotionValue(300);
+  const spotYRaw = useMotionValue(300);
+  const spotX = useSpring(spotXRaw, { stiffness: 90, damping: 22 });
+  const spotY = useSpring(spotYRaw, { stiffness: 90, damping: 22 });
+
+  const handleMove = (e) => {
+    if (reduce) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    mxRaw.set(e.clientX / window.innerWidth - 0.5);
+    myRaw.set(e.clientY / window.innerHeight - 0.5);
+    spotXRaw.set(e.clientX - rect.left);
+    spotYRaw.set(e.clientY - rect.top);
+  };
+
+  const handleLeave = () => {
+    mxRaw.set(0);
+    myRaw.set(0);
+  };
 
   return (
     <section
       id="certificates"
-      className="py-20 px-4 relative overflow-hidden bg-gradient-to-b from-black via-gray-900 to-black text-white"
+      onPointerMove={handleMove}
+      onPointerLeave={handleLeave}
+      className="relative isolate overflow-hidden px-4 pb-20 pt-10 text-gray-900 sm:px-6"
     >
-      {/* Background Glow */}
-      <div className="absolute -bottom-40 left-1/2 transform -translate-x-1/2 w-[700px] h-[700px] bg-blue-500/10 blur-[140px] rounded-full" />
-
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="relative z-10 mx-auto max-w-6xl">
         {/* Header */}
         <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
+          className="mb-14 text-center"
+          initial={{ opacity: 0, y: -40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <motion.h2
-            className="text-4xl md:text-5xl font-extrabold mb-6 text-white drop-shadow-[0_0_15px_#3b82f6]"
-            animate={{
-              textShadow: [
-                "0 0 10px #3b82f6",
-                "0 0 20px #3b82f6",
-                "0 0 15px #60a5fa",
-                "0 0 10px #3b82f6",
-              ],
-            }}
-            transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
-          >
-            Certificates & Achievements
-          </motion.h2>
-          <div className="w-44 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full shadow-[0_0_10px_#3b82f6]" />
+          <h2 className="inline-block text-4xl font-extrabold text-darkblue-800 sm:text-5xl">
+            Certificates &amp; Achievements
+          </h2>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="mx-auto mt-3 h-1 w-24 origin-center rounded-full bg-gradient-to-r from-darkblue-500 to-lightblue-400"
+          />
+          <p className="mt-4 text-lg text-gray-600">
+            Courses and diplomas I have completed to build my skills.
+          </p>
         </motion.div>
 
-        {/* Certificates Carousel */}
-        <div className="relative overflow-hidden">
-          <motion.div
-            className="flex space-x-6"
-            animate={{ x: [0, -2000, 0] }}
-            transition={{
-              duration: 40,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-          >
-            {[...certificates, ...certificates].map((cert, index) => (
-              <motion.div
-                key={index}
-                className="flex-shrink-0 w-80"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
+        {/* Certificates Grid */}
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {certificates.map((cert, index) => (
+            <motion.article
+              key={cert.title}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              whileHover={reduce ? undefined : { y: -6 }}
+              transition={{ duration: 0.6, delay: (index % 3) * 0.12, ease: "easeOut" }}
+              viewport={{ once: true, amount: 0.15 }}
+              className="group flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-md shadow-gray-200/70 transition-[border-color,box-shadow] duration-300 hover:border-lightblue-400 hover:shadow-xl hover:shadow-lightblue-500/20"
+            >
+              {/* Certificate Image (opens the certificate) */}
+              <a
+                href={cert.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Open ${cert.title} certificate`}
+                className="relative block h-52 overflow-hidden border-b border-gray-100 bg-gray-100"
               >
-                <motion.div
-                  className="bg-white/5 backdrop-blur-md rounded-xl overflow-hidden border border-white/10 hover:border-blue-400/40 hover:shadow-[0_0_20px_#3b82f6] transition-all duration-300 group h-[480px] flex flex-col"
-                  whileHover={{ y: -5, scale: 1.02 }}
+                <img
+                  src={cert.image}
+                  alt={`${cert.title} certificate`}
+                  loading="lazy"
+                  className="h-full w-full object-contain p-2 transition-transform duration-500 group-hover:scale-105"
+                />
+                <span className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-lg border border-lightblue-100 bg-white/90 shadow-sm backdrop-blur-sm">
+                  <Award className="h-5 w-5 text-darkblue-500" />
+                </span>
+              </a>
+
+              {/* Certificate Content */}
+              <div className="flex flex-1 flex-col p-5">
+                <span className="mb-3 inline-flex w-fit items-center gap-1.5 rounded-full border border-lightblue-200 bg-lightblue-50 px-3 py-1 text-xs font-medium text-darkblue-600">
+                  <Calendar className="h-3.5 w-3.5" />
+                  {cert.date}
+                </span>
+
+                <h3 className="mb-1 text-lg font-bold leading-snug text-darkblue-800">
+                  {cert.title}
+                </h3>
+                <p className="mb-3 text-sm font-semibold text-darkblue-500">{cert.issuer}</p>
+
+                <p className="mb-5 text-sm leading-relaxed text-gray-600">
+                  {cert.description}
+                </p>
+
+                <motion.a
+                  href={cert.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={reduce ? undefined : { scale: 1.03 }}
+                  whileTap={reduce ? undefined : { scale: 0.97 }}
+                  className="group/btn mt-auto inline-flex items-center justify-center gap-2 rounded-xl bg-darkblue-800 px-4 py-2.5 text-sm font-medium text-white transition-colors duration-300 hover:bg-darkblue-500 hover:shadow-lg hover:shadow-darkblue-500/30"
                 >
-                  {/* Certificate Image */}
-                  <div className="relative h-44 overflow-hidden">
-                    <img
-                      src={cert.image}
-                      alt={cert.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                    <div className="absolute top-3 right-3 bg-white/10 p-2 rounded-lg backdrop-blur-sm border border-white/10">
-                      <Award className="w-5 h-5 text-cyan-400" />
-                    </div>
-                  </div>
-
-                  {/* Certificate Content */}
-                  <div className="p-5 flex flex-col flex-grow">
-                    <div className="flex items-center text-blue-400 text-sm mb-2">
-                      <Calendar className="w-4 h-4 mr-1" />
-                      {cert.date}
-                    </div>
-
-                    <h3 className="text-lg font-bold text-white mb-1 group-hover:text-cyan-400 transition-colors line-clamp-1">
-                      {cert.title}
-                    </h3>
-                    <p className="text-cyan-400 font-semibold text-sm mb-2 line-clamp-1">
-                      {cert.issuer}
-                    </p>
-
-                    <p className="text-gray-300 text-sm leading-relaxed mb-4 line-clamp-3">
-                      {cert.description}
-                    </p>
-
-                    <div className="mt-auto">
-                      <motion.a
-                        href={cert.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center space-x-2 px-4 py-2 bg-gradient-to-r from-blue-500 via-cyan-500 to-purple-600 rounded-lg hover:from-blue-600 hover:via-cyan-600 hover:to-purple-700 transition-all text-white text-sm font-medium shadow-[0_0_10px_#3b82f6]"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                        <span>View Certificate</span>
-                      </motion.a>
-                    </div>
-                  </div>
-                </motion.div>
-              </motion.div>
-            ))}
-          </motion.div>
+                  <ExternalLink className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+                  <span>View Certificate</span>
+                </motion.a>
+              </div>
+            </motion.article>
+          ))}
         </div>
       </div>
     </section>

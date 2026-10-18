@@ -1,1 +1,154 @@
 @import "tailwindcss";
+
+@theme {
+    /* White & black */
+    --color-white: #ffffff;
+    --color-black: #000000;
+
+    /* Gray */
+    --color-gray-50: #f9fafb;
+    --color-gray-100: #f3f4f6;
+    --color-gray-200: #e5e7eb;
+    --color-gray-300: #d1d5db;
+    --color-gray-400: #9ca3af;
+    --color-gray-500: #6b7280;
+    --color-gray-600: #4b5563;
+    --color-gray-700: #374151;
+    --color-gray-800: #1f2937;
+    --color-gray-900: #111827;
+
+    /* Light blue */
+    --color-lightblue-50: #f0f9ff;
+    --color-lightblue-100: #e0f2fe;
+    --color-lightblue-200: #bae6fd;
+    --color-lightblue-300: #7dd3fc;
+    --color-lightblue-400: #38bdf8;
+    --color-lightblue-500: #0ea5e9;
+
+    /* Dark blue */
+    --color-darkblue-500: #1d4ed8;
+    --color-darkblue-600: #1e40af;
+    --color-darkblue-700: #1e3a8a;
+    --color-darkblue-800: #001d3d;
+    --color-darkblue-900: #000814;
+}
+
+html {
+    scroll-padding-top: 4rem;
+    overflow-x: hidden;
+}
+
+body {
+    position: relative;
+    margin: 0;
+    max-width: 100%;
+    overflow-x: hidden;
+    background-color: var(--color-white);
+    color: var(--color-gray-900);
+}
+
+::selection {
+    background-color: var(--color-lightblue-200);
+    color: var(--color-darkblue-800);
+}
+
+@supports (overflow-x: clip) {
+
+    html,
+    body {
+        overflow-x: clip;
+    }
+}
+
+/* Resume button: soft shine sweep every few seconds */
+@keyframes resume-shine {
+    0% {
+        transform: translateX(0) skewX(-12deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    40% {
+        transform: translateX(450%) skewX(-12deg);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(450%) skewX(-12deg);
+        opacity: 0;
+    }
+}
+
+.resume-shine {
+    animation: resume-shine 4s ease-in-out infinite;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .resume-shine {
+        animation: none;
+    }
+}
+
+@keyframes gradient-flow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 200% 50%;
+    }
+}
+
+/* Badge border (light blue and dark blue only) */
+.badge-border {
+    background-image: linear-gradient(90deg,
+            var(--color-lightblue-400),
+            var(--color-darkblue-500),
+            var(--color-lightblue-300),
+            var(--color-lightblue-400));
+    background-size: 200% 100%;
+    animation: gradient-flow 4s linear infinite;
+}
+
+/* Name: slow flowing gradient (dark blue to light blue) */
+.name-gradient {
+    background-image: linear-gradient(90deg,
+            var(--color-darkblue-500),
+            var(--color-lightblue-500),
+            var(--color-darkblue-700),
+            var(--color-darkblue-500));
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradient-flow 6s linear infinite;
+}
+
+/* Role line grows in */
+@keyframes line-grow {
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
+}
+
+.role-line {
+    transform-origin: left;
+    animation: line-grow 0.8s ease-out 0.6s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .badge-border,
+    .name-gradient,
+    .role-line {
+        animation: none;
+    }
+}

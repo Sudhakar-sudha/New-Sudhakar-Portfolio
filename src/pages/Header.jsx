@@ -1,211 +1,237 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { TypeAnimation } from 'react-type-animation';
 import { Github, Linkedin, Instagram, MessageCircle, Mail, Download } from 'lucide-react';
-import ParticlesBackground from "../components/ParticlesBackground"
-const Header = () => {
-    const socialLinks = [
-        { icon: Linkedin, href: 'https://www.linkedin.com/in/sudhakar89/', color: 'hover:text-blue-500' },
-        { icon: Github, href: 'https://github.com/Sudhakar-sudha', color: 'hover:text-gray-400' },
-        { icon: Instagram, href: 'https://www.instagram.com/frds_call_me_sudha?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==', color: 'hover:text-pink-500' },
-        { icon: MessageCircle, href: 'https://wa.me/7092238804', color: 'hover:text-green-500' },
-        { icon: Mail, href: 'mailto:sudhakarsudha8672@gmail.com', color: 'hover:text-red-500' }
-    ];
-    const handleOpenPdf = () => {
-        // Replace with the URL or path to your PDF file
-        const pdfUrl = "./Resume.pdf";
-        window.open(pdfUrl, "_blank"); // Opens the PDF in a new tab
-    };
+import CharacterCanvas from '../components/CharacterCanvas';
+
+const SOCIAL_LINKS = [
+    { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/sudhakar89/', color: 'hover:text-darkblue-500' },
+    { icon: Github, label: 'GitHub', href: 'https://github.com/Sudhakar-sudha', color: 'hover:text-black' },
+    { icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/frds_call_me_sudha', color: 'hover:text-lightblue-500' },
+    { icon: MessageCircle, label: 'WhatsApp', href: 'https://wa.me/917092238804', color: 'hover:text-darkblue-700' },
+    { icon: Mail, label: 'Email', href: 'mailto:sudhakarsudha8672@gmail.com', color: 'hover:text-lightblue-400' },
+];
+
+const fadeUp = (delay = 0) => ({
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { delay, duration: 0.7 },
+});
+
+const ROLES = [
+    'Full Stack Developer',
+    'React / React Native',
+    'Next.js',
+    'Flask / FastAPI',
+    'Laravel / MySQL',
+    'Data Analyst',
+];
+
+const STACK = ['React', 'Next.js', 'React Native', 'Node', 'Python', 'Laravel'];
+
+const NAME_LETTERS = 'Sudhakar'.split('');
+
+function Typewriter({ words, speed = 70, pause = 1600 }) {
+    const [index, setIndex] = useState(0);
+    const [text, setText] = useState('');
+    const [deleting, setDeleting] = useState(false);
+
+    useEffect(() => {
+        const word = words[index];
+        let delay = deleting ? speed / 2 : speed;
+
+        if (!deleting && text === word) delay = pause;
+
+        const t = setTimeout(() => {
+            if (!deleting && text === word) {
+                setDeleting(true);
+            } else if (deleting && text === '') {
+                setDeleting(false);
+                setIndex((i) => (i + 1) % words.length);
+            } else {
+                setText(word.slice(0, text.length + (deleting ? -1 : 1)));
+            }
+        }, delay);
+
+        return () => clearTimeout(t);
+    }, [text, deleting, index, words, speed, pause]);
+
     return (
-        <section
-            id="home"
-            className="flex items-center justify-center px-6 sm:px-8 lg:px-12 relative overflow-hidden min-h-screen"
-        >
-            <ParticlesBackground />
+        <span>
+            {text}
+            <span className="caret" />
+        </span>
+    );
+}
 
-            {/* Gradient Background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-indigo-900/20" />
+// Navbar is 64px tall -> 80px keeps the head clearly below it
+const NAVBAR_OFFSET = 15;
 
-            <div className="max-w-7xl mx-auto flex flex-col-reverse lg:grid lg:grid-cols-2 gap-8 items-center z-10 mt-10">
-                {/* Left Content */}
-                <motion.div
-                    className=" lg:mt-10 px-2 sm:px-0"
-                    initial={{ opacity: 0, x: -50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8 }}
+const Header = () => (
+    <section
+        id="home"
+        className="relative flex flex-col overflow-hidden bg-gray-100 xl:min-h-screen xl:flex-row xl:items-center"
+    >
+        {/* Character: top block on mobile, full-section background on desktop */}
+        <div className="relative h-[68svh] min-h-[400px] w-full xl:absolute xl:inset-0 xl:h-auto xl:min-h-0">
+            <CharacterCanvas desktopFocus={0.68} topOffset={NAVBAR_OFFSET} />
+            {/* soft fade into the text block (mobile only) */}
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-gray-100 to-transparent xl:hidden" />
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-14 pt-2 sm:px-6 lg:px-8 xl:pb-10 xl:pt-24">
+            <div className="mx-auto max-w-xl text-center xl:mx-0 xl:max-w-[44%] xl:text-left">
+
+                {/* Status pill */}
+                <motion.a
+                    {...fadeUp(0.1)}
+                    href="https://localestartup.in"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mb-7 inline-flex items-center gap-2.5 rounded-full bg-gray-900/90 py-2 pl-3 pr-4 font-mono text-[11px]
+             font-medium uppercase tracking-[0.2em] text-gray-100 shadow-lg ring-1 ring-white/10 backdrop-blur
+             transition-transform duration-300 hover:-translate-y-0.5"
                 >
+                    <span className="relative flex h-2 w-2">
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-lightblue-400 opacity-75" />
+                        <span className="relative inline-flex h-2 w-2 rounded-full bg-lightblue-400" />
+                    </span>
+                    Open to freelance
+                    <span className="text-gray-500">/</span>
+                    <span className="text-lightblue-300">2026</span>
+                </motion.a>
 
-                    <motion.div
-                        className="text-center lg:text-left space-y-4 mt-10"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
+                {/* Name: letter by letter + hand-drawn underline */}
+                <motion.div {...fadeUp(0.15)}>
+                    <p className="mb-1 font-mono text-sm tracking-[0.3em] text-gray-500">
+                        <span className="text-darkblue-500">&gt;</span> hello_world, I'm
+                    </p>
+
+                    <h1
+                        aria-label="Sudhakar"
+                        className="relative inline-block text-6xl font-black tracking-tighter text-gray-900 sm:text-7xl xl:text-8xl"
                     >
-                        {/* Freelancer Badge */}
-                        <motion.div
-                            className="inline-block mb-4 px-5 py-2.5 
-                                    bg-gradient-to-r from-blue-500/20 to-cyan-500/20 
-                                    border border-blue-400/30 
-                                    text-white rounded-full font-bold
-                                    text-md tracking-wide 
-                                    shadow-[0_0_15px_rgba(59,130,246,0.4)] 
-                                    backdrop-blur-md"
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.3, duration: 0.6 }}
-                        >
-                            <a
-                                href="https://localestartup.in"
-                                target="_blank"
-                                rel="noopener noreferrer"
+                        {NAME_LETTERS.map((ch, i) => (
+                            <motion.span
+                                key={i}
+                                aria-hidden="true"
+                                className="inline-block"
+                                initial={{ opacity: 0, y: 40, rotate: 6 }}
+                                animate={{ opacity: 1, y: 0, rotate: 0 }}
+                                transition={{ delay: 0.3 + i * 0.06, type: 'spring', stiffness: 260, damping: 18 }}
                             >
-                                🔵 Available for Freelance Work
-                            </a>
-                        </motion.div>
-
-
-                        {/* Name */}
-                        <motion.h1
-                            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent leading-tight"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.4, duration: 0.8 }}
-                        >
-                            Hi, I'm Sudhakar
-                        </motion.h1>
-
-                        <motion.h2
-                            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-white"
-                            transition={{ delay: 0.6, duration: 2, repeat: Infinity, repeatType: "reverse" }}
-                        >
-                            Full Stack Web & App Developer
-                        </motion.h2>
-
-                    </motion.div>
-
-                    {/* <motion.h1
-                        className="text-center lg:text-left text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold  bg-blue-500  bg-clip-text text-transparent leading-tight"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2, duration: 0.8 }}
-                    >
-                        Hi, I'm Sudhakar
-                    </motion.h1>
-                    <motion.h1
-                        className="text-center lg:text-left text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-bold  bg-blue-500 bg-clip-text text-transparent leading-tight"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2, duration: 0.8 }}
-                    >
-                        Full Stack Web and App Developer
-                    </motion.h1> */}
-
-                    {/* <div className="text-center lg:text-left text-xl sm:text-2xl md:text-3xl text-gray-300 mb-2 mt-2 h-10 sm:h-12">
-                        <TypeAnimation
-                            sequence={[
-                                'Full Stack Developer . . .',
-                                2000,
-                                'Data Analyst . . .',
-                                2000,
-                                'React / React Native . . .',
-                                2000,
-                                'Nextjs . . .',
-                                2000,
-                                'Flask / Fastapi . . . ',
-                                2000,
-                            ]}
-                            wrapper="span"
-                            speed={50}
-                            repeat={Infinity}
-                            className="bg-orange-400 bg-clip-text text-transparent"
-                        />
-                    </div> */}
-
-                    <motion.p
-                        className=" text-left text-base sm:text-md md:text-lg text-gray-100 mb-6 max-w-2xl mt-2 "
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.6, duration: 0.8 }}
-                    >
-                        👋 Hi there! I'm Sudhakar – a freelance full-stack developer helping students build projects and businesses go digital.
-                        <br />
-                        🎓 Are you a student? I can guide you with your final-year project, app ideas, or internship support.
-                        <br />
-                        🧑‍💼 Running a business or startup? Let’s build your website, mobile app, or custom solution together!
-                        <br />
-                        💡 Got an idea? Let's turn it into something real!
-                        <br />
-                        👉 Let’s Talk or explore my Projects
-                    </motion.p>
-
-                    {/* Social Links */}
-                    <motion.div
-                        className="flex justify-center lg:justify-start space-x-4 sm:space-x-6 mb-4"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.8, duration: 0.8 }}
-                    >
-                        {socialLinks.map((social, index) => (
-                            <motion.a
-                                key={index}
-                                href={social.href}
-                                target="_blank"
-                                className={`p-2 sm:p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-gray-300 ${social.color} transition-all duration-300`}
-                                whileHover={{ scale: 1.2, rotate: 360 }}
-                                whileTap={{ scale: 0.9 }}
-                            >
-                                <social.icon className="w-5 h-5 sm:w-6 sm:h-6" />
-                            </motion.a>
+                                {ch}
+                            </motion.span>
                         ))}
-                    </motion.div>
-                    {/* Download Resume Button */}
-                    <motion.div
-                        className="flex justify-center lg:justify-start"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 1, duration: 0.8 }}
-                    >
-                        <motion.button
-                            className="group relative px-6 sm:px-8 py-3 mb-5 sm:py-4 bg-gradient-to-r cursor-pointer from-blue-500 to-violet-600 rounded-full text-white font-semibold text-base sm:text-lg overflow-hidden"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={handleOpenPdf}
+                        <svg
+                            aria-hidden="true"
+                            viewBox="0 0 300 16"
+                            preserveAspectRatio="none"
+                            className="absolute -bottom-2 left-0 h-3 w-full"
                         >
-                            <span className="relative z-10 flex items-center justify-center space-x-2">
-                                <Download className="w-5 h-5" />
-                                <span>Download Resume</span>
-                            </span>
-                            <div className="absolute inset-0 bg-gradient-to-r from-violet-600 to-blue-600  opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                        </motion.button>
-                    </motion.div>
-
+                            <defs>
+                                <linearGradient id="ul" x1="0" x2="1">
+                                    <stop offset="0%" style={{ stopColor: 'var(--color-lightblue-500)' }} />
+                                    <stop offset="100%" style={{ stopColor: 'var(--color-darkblue-500)' }} />
+                                </linearGradient>
+                            </defs>
+                            <motion.path
+                                d="M4 10 C 60 2, 120 14, 180 6 S 270 8, 296 5"
+                                fill="none"
+                                stroke="url(#ul)"
+                                strokeWidth="4"
+                                strokeLinecap="round"
+                                initial={{ pathLength: 0 }}
+                                animate={{ pathLength: 1 }}
+                                transition={{ delay: 1, duration: 0.9, ease: 'easeInOut' }}
+                            />
+                        </svg>
+                    </h1>
                 </motion.div>
 
-                {/* Right Content - Profile Image */}
-                <motion.div
-                    className="flex justify-center lg:justify-end mt-16 lg:mt-12 sm:mt-16"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.4, duration: 0.8 }}
+                {/* Role: typewriter in code brackets */}
+                <motion.h2
+                    {...fadeUp(0.3)}
+                    className="mt-7 font-mono text-lg font-semibold text-gray-800 sm:text-xl xl:text-2xl"
                 >
-                    <motion.div
-                        className="relative flex items-center justify-center"
-                        animate={{ y: [0, -20, 0] }}
-                        transition={{ duration: 6, repeat: Infinity, repeatType: "reverse" }}
+                    <span className="text-darkblue-500">&lt;</span>
+                    <Typewriter words={ROLES} />
+                    <span className="text-darkblue-500"> /&gt;</span>
+                </motion.h2>
+
+                {/* Description with accent line + chips */}
+                <motion.div {...fadeUp(0.4)} className="mx-auto mt-6 max-w-lg xl:mx-0">
+                    <p className="border-l-2 border-lightblue-500/70 pl-4 text-left text-base leading-relaxed text-gray-600 md:text-lg">
+                        I help students ship <strong className="font-semibold text-gray-900">final-year projects</strong> and
+                        help <strong className="font-semibold text-gray-900">businesses and startups</strong> go digital
+                        with websites, mobile apps and custom solutions. Got an idea? Let's turn it into something real.
+                    </p>
+
+                    <ul className="mt-4 flex flex-wrap justify-center gap-2 xl:justify-start">
+                        {STACK.map((s) => (
+                            <li
+                                key={s}
+                                className="rounded-md border border-gray-300/80 bg-white/70 px-2.5 py-1 font-mono text-xs
+                   font-medium text-gray-700 backdrop-blur transition-colors hover:border-lightblue-500 hover:text-darkblue-600"
+                            >
+                                {s}
+                            </li>
+                        ))}
+                    </ul>
+                </motion.div>
+
+                {/* Resume */}
+                <motion.div {...fadeUp(0.5)} className="mt-7 flex justify-center xl:justify-start">
+                    <motion.a
+                        href="/Resume.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="resume-btn group relative inline-flex items-center gap-2 overflow-hidden rounded-full
+               bg-gradient-to-r from-lightblue-500 via-darkblue-500 to-darkblue-700 px-7 py-3 text-base font-semibold
+               text-white shadow-lg shadow-darkblue-500/40 ring-1 ring-white/20
+               transition-shadow duration-300 hover:shadow-xl hover:shadow-darkblue-500/60
+               focus:outline-none focus-visible:ring-2 focus-visible:ring-lightblue-400 focus-visible:ring-offset-2
+               focus-visible:ring-offset-gray-100"
+                        whileHover={{ scale: 1.04, y: -2 }}
+                        whileTap={{ scale: 0.97 }}
+                        transition={{ type: 'spring', stiffness: 350, damping: 22 }}
                     >
-                        {/* IMAGE CONTAINER - fills container fully */}
-                        <div className="relative w-48 h-70 sm:w-64 sm:h-100 md:w-80 md:h-120 lg:w-96 lg:h-140 overflow-hidden drop-shadow-[0_0_25px_rgba(0,112,255,0.8)]  transition-all duration-500">
-                            <img
-                                src="https://res.cloudinary.com/dlfan4caj/image/upload/v1744426192/sudhakar_iw5izp.png"
-                                alt="Sudhakar"
-                                className="w-full h-full object-cover"
-                            />
-                        </div>
-                    </motion.div>
+                        {/* Shine sweep */}
+                        <span
+                            aria-hidden="true"
+                            className="resume-shine pointer-events-none absolute inset-y-0 -left-1/2 w-1/3 -skew-x-12
+                 bg-gradient-to-r from-transparent via-white/40 to-transparent"
+                        />
+
+                        <Download className="relative z-10 h-5 w-5 transition-transform duration-300 group-hover:translate-y-0.5" />
+                        <span className="relative z-10">Download Resume</span>
+                    </motion.a>
+                </motion.div>
+
+                {/* Socials */}
+                <motion.div
+                    {...fadeUp(0.6)}
+                    className="mt-7 flex justify-center gap-3 sm:gap-4 xl:justify-start"
+                >
+                    {SOCIAL_LINKS.map(({ icon: Icon, label, href, color }) => (
+                        <motion.a
+                            key={label}
+                            href={href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={label}
+                            className={`rounded-full border border-gray-300 bg-white p-2.5 text-gray-600
+                          shadow-sm transition-colors duration-300 sm:p-3 ${color}`}
+                            whileHover={{ scale: 1.15 }}
+                            whileTap={{ scale: 0.92 }}
+                        >
+                            <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
+                        </motion.a>
+                    ))}
                 </motion.div>
             </div>
-        </section>
-    );
-};
+        </div>
+    </section>
+);
 
 export default Header;

@@ -1,41 +1,3 @@
-// import React, { useState } from "react";
-// import Header from "./pages/Header"
-// import Navbar from "./components/Navbar"
-// import Loader from "./components/Loader"
-// import Aboutus from "./pages/About";
-// import Experience from "./pages/Experience";
-// import Projects from "./pages/Projects";
-// import Skills from "./pages/Skills";
-// import Education from "./pages/Education";
-// import Certificates from "./pages/Certificates";
-// import ExperienceHero from "./components/ExperienceHero";
-// import Contact from "./pages/Contactus";
-// import Footer from "./pages/Footer";
-
-// function App() {
-// const [isLoading, setIsLoading] = useState(true);
-//   return (
-//     <>
-//    {isLoading && <Loader onComplete={() => setIsLoading(false)} />}
-//     {!isLoading && <Navbar />}
-//     {!isLoading && <Header />}
-//     {!isLoading && <ExperienceHero />}
-//     {!isLoading && <Aboutus />}
-//     {!isLoading && <Experience />}
-//     {!isLoading && <Projects />}
-//     {!isLoading && <Skills />}
-//     {!isLoading && <Education />}
-//     {!isLoading && <Certificates />}
-//     {!isLoading && <Contact />}
-//     {!isLoading && <Footer />}
-//     </>
-//   )
-// }
-
-// export default App
-
-
-
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -55,7 +17,7 @@ import Education from "./pages/Education";
 import Certificates from "./pages/Certificates";
 import Contact from "./pages/Contactus";
 
-import Preloader from "./OldPortfolio/Preloader"
+import Preloader from "./OldPortfolio/Preloader";
 import RoseDayProposal from "./ValentinesDay/RoseDayProposal";
 import ProposeDay from "./ValentinesDay/ProposeDay";
 import ChocolateDay from "./ValentinesDay/ChocolateDay";
@@ -65,6 +27,15 @@ import HugDay from "./ValentinesDay/HugDay";
 import KissDayCard from "./ValentinesDay/KissDay";
 import ValentineProposal from "./ValentinesDay/ValentinesDay";
 import LoveJourneyDashboard from "./ValentinesDay/AllDay";
+
+const IframePage = ({ src, title }) => (
+  <iframe
+    src={src}
+    title={title}
+    style={{ width: "100%", height: "100vh", border: "none" }}
+  />
+);
+
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -73,100 +44,61 @@ function App() {
       {isLoading && <Loader onComplete={() => setIsLoading(false)} />}
 
       {!isLoading && (
-        <>
-          <Routes>
-            {/* Home */}
-            <Route
-              path="/"
-              element={
-                <>
-                  <Navbar />
-                  <Header />
-                  <ExperienceHero />
-                  <Aboutus />
-                  <Experience />
-                  <Projects />
-                  <Skills />
-                  <Education />
-                  <Certificates />
-                  <Contact />
-                  <Footer />
-                </>
-              }
-            />
+        <Routes>
+          {/* Home (CharacterCanvas now lives inside Header) */}
+          <Route
+            path="/"
+            element={
+              <>
+                <Navbar />
+                <Header />
+                <ExperienceHero />
+                <Aboutus />
+                <Experience />
+                <Projects />
+                <Skills />
+                <Education />
+                <Certificates />
+                <Contact />
+                <Footer />
+              </>
+            }
+          />
 
-            {/* Individual Pages */}
-            <Route path="/oldproject" element={<Preloader />} />
+          {/* Individual pages */}
+          <Route path="/oldproject" element={<Preloader />} />
+          <Route path="/rosedayproposal" element={<RoseDayProposal />} />
+          <Route path="/promiseday" element={<ProposeDay />} />
+          <Route path="/chocolateday" element={<ChocolateDay />} />
+          <Route path="/teddyday" element={<TeddyDay />} />
+          <Route path="/proposeday" element={<PromiseDay />} />
+          <Route path="/hugday" element={<HugDay />} />
+          <Route path="/kissday" element={<KissDayCard />} />
+          <Route path="/valentinesday" element={<ValentineProposal />} />
+          <Route path="/keeruma" element={<LoveJourneyDashboard />} />
 
-            <Route path="/rosedayproposal" element={<RoseDayProposal />} />
-            <Route path="/promiseday" element={<ProposeDay />} />
-            <Route path="/chocolateday" element={<ChocolateDay />} />
-            <Route path="/teddyday" element={<TeddyDay />} />
-            <Route path="/proposeday" element={<PromiseDay />} />
-            <Route path="/hugday" element={<HugDay />} />
-            <Route path="/kissday" element={<KissDayCard />} />
-            <Route path="/valentinesday" element={<ValentineProposal />} />
-            <Route path="/keeruma" element={<LoveJourneyDashboard />} />
+          <Route path="/jsscrackers" element={<IframePage src="/JssCrackers/index.html" title="Jss Crackers" />} />
+          <Route path="/calculator" element={<IframePage src="/Calculator/index.html" title="Calculator" />} />
+          <Route path="/tneb" element={<IframePage src="/TNEB/index.html" title="TNEB bill calculator" />} />
+          <Route path="/expensetracker" element={<IframePage src="/ExpenseTracker/index.html" title="Expense Tracker" />} />
 
-            <Route
-              path="/jsscrackers"
-              element={
-                <iframe
-                  src="/JssCrackers/index.html"
-                  style={{ width: "100%", height: "100vh", border: "none" }}
-                  title="Jss Crackers"
-                />
-              }
-            />
-            <Route
-              path="/calculator"
-              element={
-                <iframe
-                  src="/Calculator/index.html"
-                  style={{ width: "100%", height: "100vh", border: "none" }}
-                  title="Calculator"
-                />
-              }
-            />
-            <Route
-              path="/tneb"
-              element={
-                <iframe
-                  src="/TNEB/index.html"
-                  style={{ width: "100%", height: "100vh", border: "none" }}
-                  title="TNEB bill calculator"
-                />
-              }
-            />
-            <Route
-              path="/expensetracker"
-              element={
-                <iframe
-                  src="/ExpenseTracker/index.html"
-                  style={{ width: "100%", height: "100vh", border: "none" }}
-                  title="Expense Tracker"
-                />
-              }
-            />
-            {/* Fallback Route */}
-            <Route
-              path="*"
-              element={
-                <div className="text-center text-gray-300 py-20 bg-black h-screen flex flex-col justify-center items-center">
-                  <h1 className="text-6xl font-extrabold text-blue-400 mb-4">404</h1>
-                  <p className="text-lg mb-8">Oops! The page you’re looking for doesn’t exist.</p>
-                  <a
-                    href="/"
-                    className="px-6 py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition-all duration-300"
-                  >
-                    ⬅ Back to Home
-                  </a>
-                </div>
-              }
-            />
-
-          </Routes>
-        </>
+          {/* Fallback */}
+          <Route
+            path="*"
+            element={
+              <div className="flex h-screen flex-col items-center justify-center bg-black py-20 text-center text-gray-300">
+                <h1 className="mb-4 text-6xl font-extrabold text-blue-400">404</h1>
+                <p className="mb-8 text-lg">Oops! The page you’re looking for doesn’t exist.</p>
+                <a
+                  href="/"
+                  className="rounded-lg bg-blue-500 px-6 py-3 text-white shadow-md transition-all duration-300 hover:bg-blue-600"
+                >
+                  ⬅ Back to Home
+                </a>
+              </div>
+            }
+          />
+        </Routes>
       )}
     </Router>
   );
