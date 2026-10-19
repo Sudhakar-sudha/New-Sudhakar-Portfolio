@@ -1,5 +1,10 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { useState, useEffect, useCallback } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 
 // Components
 import Navbar from "./components/Navbar";
@@ -16,16 +21,7 @@ import Skills from "./pages/Skills";
 import Education from "./pages/Education";
 import Certificates from "./pages/Certificates";
 import Contact from "./pages/Contactus";
-
-import Preloader from "./OldPortfolio/Preloader";
-import RoseDayProposal from "./ValentinesDay/RoseDayProposal";
-import ProposeDay from "./ValentinesDay/ProposeDay";
-import ChocolateDay from "./ValentinesDay/ChocolateDay";
-import TeddyDay from "./ValentinesDay/TeddyDay";
-import PromiseDay from "./ValentinesDay/PromiseDay";
-import HugDay from "./ValentinesDay/HugDay";
-import KissDayCard from "./ValentinesDay/KissDay";
-import ValentineProposal from "./ValentinesDay/ValentinesDay";
+import NotFound from "./components/NotFound";
 import LoveJourneyDashboard from "./ValentinesDay/AllDay";
 
 const IframePage = ({ src, title }) => (
@@ -36,70 +32,68 @@ const IframePage = ({ src, title }) => (
   />
 );
 
-function App() {
-  const [isLoading, setIsLoading] = useState(true);
+const Home = ({ onCharacterLoaded }) => (
+  <>
+    <Navbar />
+    <Header onCharacterLoaded={onCharacterLoaded} />
+    <ExperienceHero />
+    <Aboutus />
+    <Experience />
+    <Projects />
+    <Skills />
+    <Education />
+    <Certificates />
+    <Contact />
+    <Footer />
+  </>
+);
+
+function AppContent() {
+  const { pathname } = useLocation();
+
+  // Loader only on first load of the home page
+  const [isLoading, setIsLoading] = useState(pathname === "/");
+  const [canvasReady, setCanvasReady] = useState(pathname !== "/");
+
+  const handleCharacterLoaded = useCallback(() => setCanvasReady(true), []);
+  const handleLoaderComplete = useCallback(() => setIsLoading(false), []);
+
+  // Failsafe: slow network na kooda loader stuck aagama irukka
+  useEffect(() => {
+    const t = setTimeout(() => setCanvasReady(true), 15000);
+    return () => clearTimeout(t);
+  }, []);
 
   return (
-    <Router>
-      {isLoading && <Loader onComplete={() => setIsLoading(false)} />}
-
-      {!isLoading && (
-        <Routes>
-          {/* Home (CharacterCanvas now lives inside Header) */}
-          <Route
-            path="/"
-            element={
-              <>
-                <Navbar />
-                <Header />
-                <ExperienceHero />
-                <Aboutus />
-                <Experience />
-                <Projects />
-                <Skills />
-                <Education />
-                <Certificates />
-                <Contact />
-                <Footer />
-              </>
-            }
-          />
-
-          {/* Individual pages */}
-          <Route path="/oldproject" element={<Preloader />} />
-          <Route path="/rosedayproposal" element={<RoseDayProposal />} />
-          <Route path="/promiseday" element={<ProposeDay />} />
-          <Route path="/chocolateday" element={<ChocolateDay />} />
-          <Route path="/teddyday" element={<TeddyDay />} />
-          <Route path="/proposeday" element={<PromiseDay />} />
-          <Route path="/hugday" element={<HugDay />} />
-          <Route path="/kissday" element={<KissDayCard />} />
-          <Route path="/valentinesday" element={<ValentineProposal />} />
-          <Route path="/keeruma" element={<LoveJourneyDashboard />} />
-
-          <Route path="/jsscrackers" element={<IframePage src="/JssCrackers/index.html" title="Jss Crackers" />} />
-          <Route path="/calculator" element={<IframePage src="/Calculator/index.html" title="Calculator" />} />
-          <Route path="/tneb" element={<IframePage src="/TNEB/index.html" title="TNEB bill calculator" />} />
-          <Route path="/expensetracker" element={<IframePage src="/ExpenseTracker/index.html" title="Expense Tracker" />} />
-
-          {/* Fallback */}
-          <Route
-            path="*"
-            element={
-              <div className="flex h-screen flex-col items-center justify-center bg-black py-20 text-center text-gray-300">
-                <h1 className="mb-4 text-6xl font-extrabold text-blue-400">404</h1>
-                <p className="mb-8 text-lg">Oops! The page you’re looking for doesn’t exist.</p>
-                <a
-                  href="/"
-                  className="rounded-lg bg-blue-500 px-6 py-3 text-white shadow-md transition-all duration-300 hover:bg-blue-600"
-                >
-                  ⬅ Back to Home
-                </a>
-              </div>
-            }
-          />
-        </Routes>
+    <>
+      {isLoading && (
+        <Loader ready={canvasReady} onComplete={handleLoaderComplete} />
       )}
+
+      {/* Always mounted, so CharacterCanvas frames load behind the loader */}
+      <Routes>
+        <Route
+          path="/"
+          element={<Home onCharacterLoaded={handleCharacterLoaded} />}
+        />
+
+        <Route path="/keeruma" element={<LoveJourneyDashboard />} />
+
+        <Route path="/jsscrackers" element={<IframePage src="/JssCrackers/index.html" title="Jss Crackers" />} />
+        <Route path="/calculator" element={<IframePage src="/Calculator/index.html" title="Calculator" />} />
+        <Route path="/tneb" element={<IframePage src="/TNEB/index.html" title="TNEB bill calculator" />} />
+        <Route path="/expensetracker" element={<IframePage src="/ExpenseTracker/index.html" title="Expense Tracker" />} />
+
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
     </Router>
   );
 }

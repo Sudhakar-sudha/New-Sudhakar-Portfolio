@@ -12,24 +12,24 @@ import { Globe } from "lucide-react";
 //   { name: "Flask", delay: 1.2, top: "15%", left: "50%" },
 //   { name: "MongoDB", delay: 1.4, top: "80%", left: "35%" },
 // ];
-  // Different tag layouts for responsive screens
-  const tags = [
-    { name: "React", delay: 0.2, top: { base: "50%", sm: "55%", md: "50%" }, left: { base: "10%", sm: "25%", md: "25%" } },
-    { name: "React Native", delay: 0.4, top: { base: "35%", sm: "30%", md: "30%" }, left: { base: "70%", sm: "60%", md: "55%" } },
-    { name: "Tailwind CSS", delay: 0.6, top: { base: "45%", sm: "55%", md: "50%" }, left: { base: "70%", sm: "70%", md: "70%" } },
-    { name: "Next.js", delay: 0.8, top: { base: "40%", sm: "35%", md: "35%" }, left: { base: "45%", sm: "45%", md: "45%" } },
-    { name: "Node.js", delay: 1.0, top: { base: "65%", sm: "75%", md: "70%" }, left: { base: "65%", sm: "50%", md: "50%" } },
-    { name: "Express.js", delay: 1.2, top: { base: "25%", sm: "20%", md: "20%" }, left: { base: "35%", sm: "35%", md: "35%" } },
-    { name: "Flask", delay: 1.2, top: { base: "35%", sm: "15%", md: "14%" }, left: { base: "5%", sm: "50%", md: "50%" } },
-    { name: "MongoDB", delay: 1.4, top: { base: "70%", sm: "80%", md: "75%" }, left: { base: "25%", sm: "35%", md: "35%" } },
-  ];
+// Different tag layouts for responsive screens
+const tags = [
+  { name: "React", delay: 0.2, top: { base: "50%", sm: "55%", md: "50%" }, left: { base: "10%", sm: "25%", md: "25%" } },
+  { name: "React Native", delay: 0.4, top: { base: "35%", sm: "30%", md: "30%" }, left: { base: "70%", sm: "60%", md: "55%" } },
+  { name: "Tailwind CSS", delay: 0.6, top: { base: "45%", sm: "55%", md: "50%" }, left: { base: "70%", sm: "70%", md: "70%" } },
+  { name: "Next.js", delay: 0.8, top: { base: "40%", sm: "35%", md: "35%" }, left: { base: "45%", sm: "45%", md: "45%" } },
+  { name: "Node.js", delay: 1.0, top: { base: "65%", sm: "75%", md: "70%" }, left: { base: "65%", sm: "50%", md: "50%" } },
+  { name: "Express.js", delay: 1.2, top: { base: "25%", sm: "20%", md: "20%" }, left: { base: "35%", sm: "35%", md: "35%" } },
+  { name: "Flask", delay: 1.2, top: { base: "35%", sm: "15%", md: "14%" }, left: { base: "5%", sm: "50%", md: "50%" } },
+  { name: "MongoDB", delay: 1.4, top: { base: "70%", sm: "80%", md: "75%" }, left: { base: "25%", sm: "35%", md: "35%" } },
+];
 
-  // Helper function to choose responsive tag positions
-  const getPosition = (pos) => {
-    if (window.innerWidth < 640) return pos.base;
-    if (window.innerWidth < 1024) return pos.sm;
-    return pos.md;
-  };
+// Helper function to choose responsive tag positions
+const getPosition = (pos) => {
+  if (window.innerWidth < 640) return pos.base;
+  if (window.innerWidth < 1024) return pos.sm;
+  return pos.md;
+};
 
 const ExperienceHero = () => {
   return (
@@ -74,7 +74,7 @@ const ExperienceHero = () => {
           key={index}
           className="absolute bg-white/80 text-darkblue-800 text-xs sm:text-sm md:text-base font-semibold px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-lightblue-300 backdrop-blur-md shadow-[0_0_10px_rgba(14,165,233,0.2)] hover:shadow-[0_0_15px_rgba(14,165,233,0.5)] transition-all"
           style={{
-             top: getPosition(tag.top),
+            top: getPosition(tag.top),
             left: getPosition(tag.left),
             transform: "translate(-50%, -50%)",
           }}
@@ -105,7 +105,7 @@ const ExperienceHero = () => {
           <span className="text-darkblue-500">1+</span> YEAR OF <br /> EXPERIENCE IN
         </h1>
         <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-600 mt-3">
-          FULL STACK WEB & APP DEVELOPMENT
+          FULL STACK DEVELOPER
         </h2>
       </motion.div>
     </section>

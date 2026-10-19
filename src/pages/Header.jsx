@@ -66,14 +66,18 @@ function Typewriter({ words, speed = 70, pause = 1600 }) {
 // Navbar is 64px tall -> 80px keeps the head clearly below it
 const NAVBAR_OFFSET = 15;
 
-const Header = () => (
+const Header = ({ onCharacterLoaded }) => (
     <section
         id="home"
         className="relative flex flex-col overflow-hidden bg-gray-100 xl:min-h-screen xl:flex-row xl:items-center"
     >
         {/* Character: top block on mobile, full-section background on desktop */}
         <div className="relative h-[68svh] min-h-[400px] w-full xl:absolute xl:inset-0 xl:h-auto xl:min-h-0">
-            <CharacterCanvas desktopFocus={0.68} topOffset={NAVBAR_OFFSET} />
+            <CharacterCanvas
+                desktopFocus={0.68}
+                topOffset={NAVBAR_OFFSET}
+                onLoaded={onCharacterLoaded}
+            />
             {/* soft fade into the text block (mobile only) */}
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-gray-100 to-transparent xl:hidden" />
         </div>

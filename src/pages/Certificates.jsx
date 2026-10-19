@@ -17,7 +17,7 @@ const certificates = [
     title: "Diploma in Computer Application",
     issuer: "Mannivel Institute",
     date: "2022",
-    image: "./DCA.jpg",
+    image: "./Certificates/DCA.jpg",
     description:
       "Learned basic C and C++ programming along with Microsoft Word, Excel, and PowerPoint.",
     link: "https://drive.google.com/file/d/1UmEue6JSl7zBooJiwNnUA4k2tkRiWgkw/view",
@@ -26,7 +26,7 @@ const certificates = [
     title: "Diploma in Computer Hardware and Servicing",
     issuer: "Ayya Nadar Janaki Ammal College, Sivakasi",
     date: "2023",
-    image: "./ANJAC.jpg",
+    image: "./Certificates/ANJAC.jpg",
     description:
       "Gained practical knowledge in computer hardware and basic software servicing.",
     link: "https://drive.google.com/file/d/1_ODQjOKBf1ODgLzRgK5T-g_N0UcSVCoy/view",
@@ -35,7 +35,7 @@ const certificates = [
     title: "Diploma in Desktop Publishing",
     issuer: "Easy Computers, Sivakasi",
     date: "2023",
-    image: "./DTP.jpg",
+    image: "./Certificates/DTP.jpg",
     description:
       "Learned Coral Draw and Adobe Photoshop for professional graphic design projects.",
     link: "https://drive.google.com/file/d/12S8eTWqCqVX_rS9WJdxJBLvn67c8ZmRr/view",
@@ -44,7 +44,7 @@ const certificates = [
     title: "Python",
     issuer: "Ayya Nadar Janaki Ammal College",
     date: "2023",
-    image: "./python.jpg",
+    image: "./Certificates/python.jpg",
     description:
       "Explored Python basics, including libraries like NumPy and Matplotlib.",
     link: "https://drive.google.com/file/d/18Ztt7jbIgvprVPQjxrRRHldV8NDS2UN6/view?usp=sharing",
@@ -53,7 +53,7 @@ const certificates = [
     title: "Data Structures and Algorithms using Java",
     issuer: "NPTEL",
     date: "2024",
-    image: "./DSA.jpg",
+    image: "./Certificates/DSA.jpg",
     description:
       "Learned core data structures and algorithms and applied them with Java.",
     link: "https://drive.google.com/file/d/1jfzDARPlOOqKqvzyRsgZaF03qMAl2VEA/view?usp=sharing",
@@ -62,7 +62,7 @@ const certificates = [
     title: "Cloud Computing",
     issuer: "NPTEL",
     date: "2025",
-    image: "./CloudComputing.jpg",
+    image: "./Certificates/CloudComputing.jpg",
     description:
       "Learned core cloud computing concepts such as virtualization, cloud service models, scalability, and secure deployment of cloud-based applications.",
     link: "https://drive.google.com/file/d/1-neLF14ZfKIBPBr9TbyyKlPvH8X7ws_3/view?usp=sharing",
