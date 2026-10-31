@@ -19,7 +19,7 @@ const projects = [
     description:
       "Evol is a simple and fast real-time chat application that allows users to send and receive messages instantly. It is designed to be easy to use, reliable, and responsive, providing a smooth communication experience for everyday use.",
     tech: ["ReactNative", "Node.js", "Express.js", "MongoDB"],
-    demo: "https://drive.google.com/file/d/1lVSQK-qDDyMszlKrTplHw27Rupk0NtYO/view?usp=sharing",
+    demo: "https://drive.google.com/file/d/1fRGd5Riap_GidlLeHzQIJ86vj1SR60vm/view?usp=sharing",
     image: "https://res.cloudinary.com/dlfan4caj/image/upload/v1767320579/college_projects/chef_1767320547689.jpg",
   },
   {
